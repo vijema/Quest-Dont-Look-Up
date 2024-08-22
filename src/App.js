@@ -7,6 +7,7 @@ import MajorHouse from "./pages/game/locations/MajorHouse"
 
 function App() {
   return (
+    //Hi
     <div className='App'>
     <BrowserRouter>
         <Routes>
