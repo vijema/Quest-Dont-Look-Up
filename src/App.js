@@ -5,15 +5,16 @@ import Start from "./pages/game/locations/Start"
 import MajorHouse from "./pages/game/locations/MajorHouse"
 
 
-function App() {
+// Local state
+
+function App(props) {
   return (
-    //Hi 2
     <div className='App'>
     <BrowserRouter>
         <Routes>
         <Route path="/welcome" element={<Welcome/>} />
         <Route path="/start" element={<Start/>} />
-        <Route path="/major-house" element={<MajorHouse/>} />
+        <Route path="/major-house" element={<MajorHouse userState={props.globalState.attendedLocations[0].isMajorHouseAttended} />} />
           
           
         </Routes>

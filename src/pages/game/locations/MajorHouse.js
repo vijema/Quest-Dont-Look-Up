@@ -1,24 +1,23 @@
-import React, { useEffect } from 'react';
+// import state from "./State"
+import GameNavbar from "./../GameNavbar/GameNavbar"
 
-const MajorHouse = () => {
-  useEffect(() => {
-    const cookieValue = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('isMajorHouseAttended='))
-      .split('=')[1];
-    console.log(cookieValue);
-  }, []);
+const MajorHouse = (props) => {
+
+
 
   return (
+    <main>
+    <GameNavbar />
     <div className="locationMajorHouse">
       <div className="CommonBg">
-        {document.cookie.includes('isMajorHouseAttended=false') ? (
-          <p>Вы не посещали дом мэра.</p>
+        {props.userState ? (
+        <p>Вы посещали дом мэра.</p>
         ) : (
-          <p>Вы посещали дом мэра.</p>
+        <p>Вы не посещали дом мэра.</p>
         )}
       </div>
     </div>
+    </main>
   );
 };
 
