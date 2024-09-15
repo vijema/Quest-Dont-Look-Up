@@ -15,5 +15,14 @@ let state = {
 
 }
 
+export const isMajorHouseAttendedTrueFunc = () => {
+  debugger; 
+    state.attendedLocations[0].isMajorHouseAttended = true;    
+    console.log(state.attendedLocations[0].isMajorHouseAttended)
+    debugger; 
+};
+
+
+
 export default state
 

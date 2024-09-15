@@ -1,24 +1,42 @@
-// import state from "./State"
 import GameNavbar from "./../GameNavbar/GameNavbar"
 
 const MajorHouse = (props) => {
-
-
-
+  debugger;
+  console.log(props.userState)
+ 
   return (
     <main>
-    <GameNavbar />
-    <div className="locationMajorHouse">
-      <div className="CommonBg">
-        {props.userState ? (
-        <p>Вы посещали дом мэра.</p>
-        ) : (
-        <p>Вы не посещали дом мэра.</p>
-        )}
+
+      {props.userState ? <GameNavbar /> : <></>}
+
+      <div className="locationMajorHouse">
+        <div className="CommonBg">
+             
+          {props.userState ? (
+            <p>Вы ранее уже посещали дом мэра.</p>
+          ) : (
+            <p >
+              
+              Вы посетили дом мэра впервые.</p>
+              
+          )}
+          
+          {props.isMajorHouseAttended()}
+          {console.log(props.userState)}
+         
+          
+        </div>
       </div>
-    </div>
+
+      
+
     </main>
+    
   );
+
+ 
 };
+
+
 
 export default MajorHouse;

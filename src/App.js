@@ -1,24 +1,25 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import "./styles/main.css"
 import Welcome from "./pages/Welcome"
 import Start from "./pages/game/locations/Start"
 import MajorHouse from "./pages/game/locations/MajorHouse"
 
 
-// Local state
+// Local state and Callbacks
 
 function App(props) {
+	
   return (
-    <div className='App'>
-    <BrowserRouter>
+    <div className='App'>   
         <Routes>
         <Route path="/welcome" element={<Welcome/>} />
         <Route path="/start" element={<Start/>} />
-        <Route path="/major-house" element={<MajorHouse userState={props.globalState.attendedLocations[0].isMajorHouseAttended} />} />
+        <Route path="/major-house" element={<MajorHouse 
+					userState={props.globalState.attendedLocations[0].isMajorHouseAttended}
+					isMajorHouseAttended={props.isMajorHouseAttended} />} />
           
           
-        </Routes>
-      </BrowserRouter>
+        </Routes>      
       </div>
     
   );
