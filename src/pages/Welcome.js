@@ -4,6 +4,8 @@ import PicWelcome from '../img/Ticket.jpg';
 
 
 const Welcome = () => {
+
+  const clearKeys = () => {localStorage.clear()}
   return (
 
     <div className="container">
@@ -14,10 +16,13 @@ const Welcome = () => {
         </p>
 
         <NavLink to='/start' className="btn">Let's start!</NavLink>
+        <NavLink className="btn" onClick={clearKeys}>Clear Keys</NavLink>
       
     </div>
 
     );
 }
  
+
+
 export default Welcome;

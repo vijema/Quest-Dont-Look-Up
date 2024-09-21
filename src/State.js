@@ -15,11 +15,10 @@ let state = {
 
 }
 
-export const isMajorHouseAttendedTrueFunc = () => {
-  debugger; 
+export const isMajorHouseAttendedTrueFunc = () => { 
     state.attendedLocations[0].isMajorHouseAttended = true;    
     console.log(state.attendedLocations[0].isMajorHouseAttended)
-    debugger; 
+    
 };
 
 

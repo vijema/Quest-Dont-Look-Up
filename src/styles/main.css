@@ -435,7 +435,7 @@ body {
 	background-color: rgba(0, 0, 0, 0.75);
 	padding: 20px;}
 
-
+h1 {font-size: 28px;} 
 
 	/* Btn */
 
@@ -443,13 +443,15 @@ body {
 	display: inline-block;
 	height: 48px;
 	padding: 12px 28px;
-	margin: 20px auto;
+	margin: 20px 10px;
 	border-radius: 5px;
 	background-color: var(--accent);
 	color: var(--white);
 	letter-spacing: 0.15px;
 	font-size: 16px;
 	font-weight: 500;
+	
+	
 
 	transition: opacity 0.2s ease-in;
 }
