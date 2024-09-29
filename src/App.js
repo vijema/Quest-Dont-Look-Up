@@ -4,7 +4,7 @@ import Welcome from "./pages/Welcome"
 import Start from "./pages/game/locations/Start"
 import MajorHouse from "./pages/game/locations/MajorHouse"
 
-
+// Some location items components added as list via array
 // Local storage stable work beta v1
 
 function App(props) {

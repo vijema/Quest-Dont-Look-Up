@@ -417,6 +417,7 @@ body {
 	min-height: 100vh;
 
 	display: flex;
+	flex-direction: column;  
 	justify-content: center;
 	align-items: center;
 
@@ -436,6 +437,7 @@ body {
 	padding: 20px;}
 
 h1 {font-size: 28px;} 
+h2 {font-size: 22px;} 
 
 	/* Btn */
 

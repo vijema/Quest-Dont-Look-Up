@@ -7,6 +7,22 @@ let state = {
         {isBeaconInsideAttended: false},
       ],
 
+    locData : [
+        {   //loc : MajorHouse,
+            title :"Major's House",
+            //img : {MajorHouse},
+            link: '/major-house',
+            isAttended: false
+        },
+        {   //loc : FarmerHouse,
+            title :"Farmer's House",
+            //img : {FarmerHouse},
+            link: '/',
+            isAttended: false
+        }],
+
+    
+
     collectedArtifacts : [
         {isMajorLettr: false},
         {isBeaconKey: false},
@@ -14,6 +30,8 @@ let state = {
       ]
 
 }
+
+
 
 export const isMajorHouseAttendedTrueFunc = () => { 
     state.attendedLocations[0].isMajorHouseAttended = true;    
