@@ -38,9 +38,21 @@ let store = {
 
     isMajorHouseAttendedTrueFunc () { 
         this._state.attendedLocations[0].isMajorHouseAttended = true;    
-        console.log(this._state.attendedLocations[0].isMajorHouseAttended)
-        
+        console.log(this._state.attendedLocations[0].isMajorHouseAttended)        
     },
+
+    isFarmerHouseAttendedTrueFunc () { 
+        this._state.attendedLocations[0].isFarmerHouseAttended = true;    
+        console.log(this._state.attendedLocations[0].isFarmerHouseAttended)        
+    },
+
+    clearKeys () { debugger
+        this._state.attendedLocations[0].isMajorHouseAttended = false;    
+        console.log(this._state.attendedLocations[0].isMajorHouseAttended)  
+        localStorage.clear()         
+    },
+
+    dispatch(action) {},
 
     
 }

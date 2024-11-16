@@ -3,9 +3,9 @@ import "../styles/main.css"
 import PicWelcome from '../img/Ticket.jpg';
 
 
-const Welcome = () => {
+const Welcome = (props) => {
 
-  const clearKeys = () => {localStorage.clear()}
+  debugger
   return (
 
     <div className="container">
@@ -16,7 +16,7 @@ const Welcome = () => {
         </p>
 
         <NavLink to='/start' className="btn">Let's start!</NavLink>
-        <NavLink className="btn" onClick={clearKeys}>Clear Keys</NavLink>
+        <NavLink className="btn" onClick={props.clearKeys}>Clear Keys</NavLink>
       
     </div>
 

@@ -8,11 +8,15 @@ import store from "./Store"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  
+
     <BrowserRouter>
-        <App globalState={store.getState()} isMajorHouseAttended={store.isMajorHouseAttendedTrueFunc.bind(store)}/>
+        <App
+            state={store.getState()}
+            isMajorHouseAttended={store.isMajorHouseAttendedTrueFunc.bind(store)}
+            clearKeys={store.clearKeys.bind(store)}
+        />
     </BrowserRouter>
-  
+
 );
 
 

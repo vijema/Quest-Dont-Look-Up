@@ -10,15 +10,16 @@ import MajorHouse from "./pages/game/locations/MajorHouse"
 function App(props) {
 
   
-	
+	debugger
   return (
     <div className='App'>   
         <Routes>
-        <Route path="/" element={<Welcome/>} />
+        <Route path="/" element={<Welcome  clearKeys={props.clearKeys}/>} />
         <Route path="/start" element={<Start/>} />
         <Route path="/major-house" element={<MajorHouse 
-					userState={props.globalState.attendedLocations[0].isMajorHouseAttended}
-					isMajorHouseAttended={props.isMajorHouseAttended} />} />
+					state={props.state}
+					isMajorHouseAttended={props.isMajorHouseAttended} />}
+           />
           
           
         </Routes>      
