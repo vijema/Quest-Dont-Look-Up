@@ -18,7 +18,7 @@ function App(props) {
         <Route path="/start" element={<Start/>} />
         <Route path="/major-house" element={<MajorHouse 
 					state={props.state}
-					isMajorHouseAttended={props.isMajorHouseAttended} />}
+					isMajorsHouseAttended={props.isMajorsHouseAttended} />}
            />
           
           

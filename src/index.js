@@ -12,7 +12,7 @@ root.render(
     <BrowserRouter>
         <App
             state={store.getState()}
-            isMajorHouseAttended={store.isMajorsHouseAttendedTrueFunc.bind(store)}
+            isMajorsHouseAttended={store.isMajorsHouseAttendedTrueFunc.bind(store)}
             clearKeys={store.clearKeys.bind(store)}
         />
     </BrowserRouter>

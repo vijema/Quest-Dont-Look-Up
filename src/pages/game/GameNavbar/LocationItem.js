@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './GameNavbar.module.css'
 
 
-const LocItem = (props) => {
+const LocationItem = (props) => {
 
     return (
         <>                          
@@ -14,4 +14,4 @@ const LocItem = (props) => {
     );
 };
 
-export default LocItem;
+export default LocationItem;

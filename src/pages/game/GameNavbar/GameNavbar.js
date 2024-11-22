@@ -1,16 +1,18 @@
 import { NavLink } from 'react-router-dom';
 import styles from './GameNavbar.module.css'
 import maincss from './../../../styles/main.css'
-import LocItem from './LocItem'
-import state from './../../../State'
+import LocationItem from './LocationItem'
+import store from './../../../Store'
 
 const GameNavbar = () => {
 
-    let locElements = state.locData.map(loc => <LocItem key={loc.title} title={loc.title} link={loc.link}/>  )
+    const state = store.getState()
+    const locElements = state.locationsData.filter(loc => loc.isAttended).map(loc => <LocationItem key={loc.title} title={loc.title} link={loc.link}/>  )
     return (
         <main>
+            <h2 className={maincss.h2}>Where we go?</h2>
             <nav className={styles.nav}>
-                <h2 className={maincss.h2}>Where we go?</h2>
+                
                 {locElements}
                 
                 {//<div className={styles.item}>

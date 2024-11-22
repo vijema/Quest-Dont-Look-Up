@@ -25,9 +25,10 @@ debugger
   // Эффект для изменения состояния при первом посещении - на основе изменения стейта
   useEffect(() => {  
 
-    const majorsHouseHasVisited = props.state.attendedLocations[0].isMajorsHouseAttended;
+    const majorsHouseHasVisited = props.state.attendedLocations.isMajorsHouseAttended;    
 
     if (!majorsHouseHasVisited) { 
+      localStorage.setItem('Major House Has Visited', 'true');
       props.isMajorsHouseAttended (true)        
     } else {
       setIsMajorsHouseFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние
