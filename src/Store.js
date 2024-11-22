@@ -3,10 +3,26 @@ let store = {
     _state: {
 
         attendedLocations : [
-            {isMajorHouseAttended: false},
+            {isMajorsHouseAttended: false},
             {isFarmerHouseAttended: false},
-            {isSecretCaveAttended: false},
-            {isBeaconInsideAttended: false},
+            {isSerfersBaseAttended: false},
+            {isBeaconAttended: [
+                {BeaconMainDoor : false},
+                {BeaconBackDoor : false},
+            ]},
+            {isSecretCaveAttended: [
+                {TunnelToBeacon : false},
+                {TunnelToChurch : false},
+                {TunnelToPit : false},
+            ]},
+            {isChurchAttended: [
+                {ChurchPublicEntrance : false},
+                {ChurchSecretEntrance : false},
+            ]},
+            {isMarketStoreAttended: false},
+            {isFlightFieldAttended: false},
+            {isCarrotFieldAttended: false},
+            
           ],
     
         locData : [
@@ -36,19 +52,19 @@ let store = {
     getState () {return this._state},
 
 
-    isMajorHouseAttendedTrueFunc () { 
-        this._state.attendedLocations[0].isMajorHouseAttended = true;    
-        console.log(this._state.attendedLocations[0].isMajorHouseAttended)        
+    isMajorsHouseAttendedTrueFunc () { 
+        this._state.attendedLocations[0].isMajorsHouseAttended = true;   
+        console.log('isMajorsHouseAttended =' + this._state.attendedLocations[0].isMajorsHouseAttended)         
     },
 
     isFarmerHouseAttendedTrueFunc () { 
         this._state.attendedLocations[0].isFarmerHouseAttended = true;    
-        console.log(this._state.attendedLocations[0].isFarmerHouseAttended)        
+        console.log('isFarmerHouseAttended =' + this._state.attendedLocations[0].isFarmerHouseAttended)          
     },
 
-    clearKeys () { debugger
-        this._state.attendedLocations[0].isMajorHouseAttended = false;    
-        console.log(this._state.attendedLocations[0].isMajorHouseAttended)  
+    clearKeys () { 
+        this._state.attendedLocations[0].isMajorsHouseAttended = false;    
+        this._state.attendedLocations[0].isFarmerHouseAttended = false;   
         localStorage.clear()         
     },
 

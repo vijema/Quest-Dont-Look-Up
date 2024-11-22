@@ -1,23 +1,23 @@
 import { useState, useEffect } from 'react';
 import GameNavbar from "./../GameNavbar/GameNavbar"
 
-const MajorHouse = (props) => {
+const MajorsHouse = (props) => {
 debugger
 
   // Локальный стейт для отслеживания первого посещения
-  const [isMajorHouseFirstVisit, setIsMajorHouseFirstVisit] = useState(true);
+  const [isMajorsHouseFirstVisit, setIsMajorsHouseFirstVisit] = useState(true);
 
 
   // Эффект для изменения состояния при первом посещении - на основе local storage
   // useEffect(() => {  
 
-  //   const majorHouseHasVisited = localStorage.getItem('Major House Has Visited');
+  //   const majorsHouseHasVisited = localStorage.getItem('Major House Has Visited');
 
-  //   if (!majorHouseHasVisited) { 
+  //   if (!majorsHouseHasVisited) { 
   //     localStorage.setItem('Major House Has Visited', 'true'); // Устанавливаем флаг первого посещения 
-  //     props.isMajorHouseAttended (true)      
+  //     props.isMajorsHouseAttended (true)      
   //   } else {
-  //     setIsMajorHouseFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние        
+  //     setIsMajorsHouseFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние        
   //   }
   // }, [props]);
 
@@ -25,12 +25,12 @@ debugger
   // Эффект для изменения состояния при первом посещении - на основе изменения стейта
   useEffect(() => {  
 
-    const majorHouseHasVisited = props.state.attendedLocations[0].isMajorHouseAttended;
+    const majorsHouseHasVisited = props.state.attendedLocations[0].isMajorsHouseAttended;
 
-    if (!majorHouseHasVisited) { 
-      props.isMajorHouseAttended (true)        
+    if (!majorsHouseHasVisited) { 
+      props.isMajorsHouseAttended (true)        
     } else {
-      setIsMajorHouseFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние
+      setIsMajorsHouseFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние
         
     }
   }, [props]);
@@ -42,11 +42,11 @@ debugger
     <div className="locationMajorHouse">
         <div className="CommonBg">
         
-      {isMajorHouseFirstVisit ? (
+      {isMajorsHouseFirstVisit ? (
         <>
         <GameNavbar />
         <div className='content'>
-        <MajorHouseFirstVisitComponent />        
+        <MajorsHouseFirstVisitComponent />        
         </div>
         
         </>
@@ -54,7 +54,7 @@ debugger
         <>
         <GameNavbar />
         <div className='content'>
-        <MajorHouseNextVisitsComponent />
+        <MajorsHouseNextVisitsComponent />
         </div>                     
         </>
       )}
@@ -63,15 +63,15 @@ debugger
   );
 };
 
-const MajorHouseFirstVisitComponent = () => {
+const MajorsHouseFirstVisitComponent = () => {
   return <h1><span style={{color: "pink"}}>Вы посетили дом мэра впервые.</span></h1>;
 };
 
-const MajorHouseNextVisitsComponent = () => {
+const MajorsHouseNextVisitsComponent = () => {
   return <h1><span style={{color: "aqua"}}>Вы ранее уже посещали дом мэра.</span></h1>;
 };
 
-export default MajorHouse;
+export default MajorsHouse;
 
 
 
