@@ -10,15 +10,15 @@ let store = {
             MajorsHouse: {
                 title: "Major's House",
                 //img : {MajorHouse},
-                link: "/major-house",
-                isAttended: localStorage.getItem("Major House Has Visited") === "true",
+                link: "/majors-house",
+                isAttended: localStorage.getItem("MajorsHouse has visited") === "true",
             },
             FarmersHouse: {
                 //loc : FarmerHouse,
                 title: "Farmer's House",
                 //img : {FarmerHouse},
-                link: "/",
-                isAttended: true,
+                link: "/farmers-house",
+                isAttended: localStorage.getItem("FarmersHouse has visited") === "true",
             },
             SerfersBase: {
                 title: "Serfers Base",
@@ -68,7 +68,7 @@ let store = {
         return this._state;
     },    
     
-    isMajorsHouseAttendedTrueFunc(locationKey) {        
+    isLocationAttendedTrueFunc(locationKey) {        
         if (this._state.locationsData[locationKey]) {
           this._state.locationsData[locationKey].isAttended = true;
         }

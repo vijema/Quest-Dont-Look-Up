@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import GameNavbar from "./../GameNavbar/GameNavbar"
 
 const MajorsHouse = (props) => {
@@ -6,18 +7,18 @@ const MajorsHouse = (props) => {
   debugger
   
   // Локальный стейт для отслеживания первого посещения
-  const [isMajorsHouseFirstVisit, setIsMajorsHouseFirstVisit] = useState(true); 
+  const [islocationFirstVisit, setIislocationFirstVisit] = useState(true); 
 
   // Эффект для изменения состояния при первом посещении - на основе изменения стейта
   useEffect(() => {  
     const locationKey = 'MajorsHouse';
-    const majorsHouseHasVisited = props.state.locationsData[locationKey].isAttended;    
+    const locationHasVisited = props.state.locationsData[locationKey].isAttended;    
 
-    if (!majorsHouseHasVisited) { 
-      localStorage.setItem('Major House Has Visited', 'true');
-      props.isMajorsHouseAttended (locationKey)        
+    if (!locationHasVisited) { 
+      localStorage.setItem(locationKey + ' has visited', 'true');
+      props.isLocationAttendedTrue (locationKey)        
     } else {
-      setIsMajorsHouseFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние
+      setIislocationFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние
         
     }
   }, [props]);
@@ -27,7 +28,7 @@ const MajorsHouse = (props) => {
     <div className="locationMajorHouse">
         <div className="CommonBg">
         
-      {isMajorsHouseFirstVisit ? (
+      {islocationFirstVisit ? (
         <>
         <GameNavbar />
         <div className='content'>
@@ -53,7 +54,12 @@ const MajorsHouseFirstVisitComponent = () => {
 };
 
 const MajorsHouseNextVisitsComponent = () => {
-  return <h1><span style={{color: "aqua"}}>Вы ранее уже посещали дом мэра.</span></h1>;
+    return <>
+        <h1><span style={{color: "aqua"}}>Вы ранее уже посещали дом мэра.</span></h1>
+        <NavLink className="btn" to='/farmers-house'>
+                    Visit Major's house
+        </NavLink>
+       </>
 };
 
 export default MajorsHouse;
