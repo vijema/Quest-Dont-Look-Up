@@ -2,41 +2,25 @@ import { useState, useEffect } from 'react';
 import GameNavbar from "./../GameNavbar/GameNavbar"
 
 const MajorsHouse = (props) => {
-debugger
 
+  debugger
+  
   // Локальный стейт для отслеживания первого посещения
-  const [isMajorsHouseFirstVisit, setIsMajorsHouseFirstVisit] = useState(true);
-
-
-  // Эффект для изменения состояния при первом посещении - на основе local storage
-  // useEffect(() => {  
-
-  //   const majorsHouseHasVisited = localStorage.getItem('Major House Has Visited');
-
-  //   if (!majorsHouseHasVisited) { 
-  //     localStorage.setItem('Major House Has Visited', 'true'); // Устанавливаем флаг первого посещения 
-  //     props.isMajorsHouseAttended (true)      
-  //   } else {
-  //     setIsMajorsHouseFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние        
-  //   }
-  // }, [props]);
-
+  const [isMajorsHouseFirstVisit, setIsMajorsHouseFirstVisit] = useState(true); 
 
   // Эффект для изменения состояния при первом посещении - на основе изменения стейта
   useEffect(() => {  
-
-    const majorsHouseHasVisited = props.state.attendedLocations.isMajorsHouseAttended;    
+    const locationKey = 'MajorsHouse';
+    const majorsHouseHasVisited = props.state.locationsData[locationKey].isAttended;    
 
     if (!majorsHouseHasVisited) { 
       localStorage.setItem('Major House Has Visited', 'true');
-      props.isMajorsHouseAttended (true)        
+      props.isMajorsHouseAttended (locationKey)        
     } else {
       setIsMajorsHouseFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние
         
     }
   }, [props]);
- 
-
 
 
   return (

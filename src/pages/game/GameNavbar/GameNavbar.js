@@ -7,7 +7,11 @@ import store from './../../../Store'
 const GameNavbar = () => {
 
     const state = store.getState()
-    const locElements = state.locationsData.filter(loc => loc.isAttended).map(loc => <LocationItem key={loc.title} title={loc.title} link={loc.link}/>  )
+    const locKeys = Object.keys(state.locationsData);
+    const attendedLocKeys = locKeys.filter(key => state.locationsData[key].isAttended);
+    const locElements = attendedLocKeys.map(key => (
+        <LocationItem key={state.locationsData[key].title} title={state.locationsData[key].title} link={state.locationsData[key].link} />
+      ));
     return (
         <main>
             <h2 className={maincss.h2}>Where we go?</h2>
