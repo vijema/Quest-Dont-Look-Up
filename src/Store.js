@@ -5,6 +5,7 @@ let store = {
                 title: "Welcome Page",
                 link: "/",
                 isAttended: true,
+                coordinates: "top-[94%] left-[83%]"
             },
             MajorsHouse: {
                 title: "Major's House",
@@ -12,6 +13,7 @@ let store = {
                 link: "/majors-house",
                 isAttended:
                     localStorage.getItem("MajorsHouse has visited") === "true",
+                coordinates: "top-[79%] left-[83%]"
             },
             FarmersHouse: {
                 //loc : FarmerHouse,
@@ -20,16 +22,19 @@ let store = {
                 link: "/farmers-house",
                 isAttended:
                     localStorage.getItem("FarmersHouse has visited") === "true",
+                coordinates: "top-[67%] left-[14.5%]"
             },
             SerfersBase: {
                 title: "Serfers Base",
                 link: "/",
                 isAttended: false,
+                coordinates: "top-[79%] left-[43%]"
             },
             Beacon: {
                 title: "Beacon Main Door",
                 link: "/",
                 isAttended: false,
+                coordinates: "top-[91%] left-[61.1%]",
 
                 BeaconMainDoor: {
                     title: "Beacon Main Door",
@@ -44,6 +49,11 @@ let store = {
                 },
             },
             SecretCave: {
+                title: "Magor's Statue",
+                link: "/",
+                isAttended: false,
+                coordinates: "top-[30%] left-[30%]",
+
                 CaveMainHall: {
                     title: "Cave Main Hall",
                     link: "/",

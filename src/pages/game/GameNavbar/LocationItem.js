@@ -7,7 +7,7 @@ const LocationItem = (props) => {
     return (
         <>                          
                 <div className={styles.item}>                    
-                    <NavLink ativeClassName={styles.active} to={props.link}>{props.title}</NavLink>
+                    <NavLink className={styles.active} to={props.link}>{props.title}</NavLink>
                 </div>
            
         </>

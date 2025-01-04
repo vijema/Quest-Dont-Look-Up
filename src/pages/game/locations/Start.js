@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import GameNavbar from '../GameNavbar/GameNavbar'
-import GameMap from '../GameMap/GameMap'
 import BgPic from '../../../images/Start.png';
 
 
@@ -9,7 +8,6 @@ const Start = () => {
 
     return (
         <>
-        <GameMap />
         <GameNavbar />  
         <div className='flex flex-col mx-auto items-center md:flex-row md:justify-center  mb-5 w-full' >
             

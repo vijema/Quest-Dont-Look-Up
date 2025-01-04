@@ -5,7 +5,7 @@ import Start from "./pages/game/locations/Start"
 import MajorsHouse from "./pages/game/locations/MajorsHouse"
 import FarmersHouse from './pages/game/locations/FarmersHouse'
 
-
+// Locatoios dots and annotations
 // Modal map prototype added
 // Some location items components added as list via array
 // Local storage stable work beta v1

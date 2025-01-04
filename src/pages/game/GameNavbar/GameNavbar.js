@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from './GameNavbar.module.css'
 import maincss from './../../../styles/main.css'
 import LocationItem from './LocationItem'
+import GameMap from './../GameMap/GameMap'
 import store from './../../../Store'
+
 
 
 
@@ -32,11 +34,12 @@ const GameNavbar = () => {
     ));
 
     return (
-        <main className=' w-full  bg-stone-900/80 text-white text-sm pt-5 mb-5 flex flex-col items-center' >
+        <main className='w-full bg-stone-900/80 text-white text-sm pt-5 mb-5 flex flex-col items-center' >
             <h2 className={maincss.h2}>Where we go?</h2>
             <nav className={styles.nav}>
                 {locElements}                
             </nav>
+            <GameMap />
         </main>
     );
 };

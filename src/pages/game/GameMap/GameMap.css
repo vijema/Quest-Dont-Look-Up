@@ -19,7 +19,7 @@
     transition: all 0.5s ease-in-out;
 
     img {
-        @apply mx-auto w-[300px] h-[408px] xs:w-[420px] xs:h-[571px] sm:w-[600px] sm:h-[815px] ;
+        @apply mx-auto w-[300px] h-[408px] xs:w-[420px] xs:h-[571px] sm:w-[600px] sm:h-[815px];
         position: relative;        
         border-radius: 5px;
         border: 10px solid white;        
