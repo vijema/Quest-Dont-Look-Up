@@ -4,8 +4,7 @@ import PicWelcome from '../img/Ticket.jpg';
 
 
 const Welcome = (props) => {
-
-  debugger
+  
   return (
 
     <div className="container">
