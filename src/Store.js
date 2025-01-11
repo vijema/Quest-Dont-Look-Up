@@ -1,9 +1,9 @@
 let store = {
     _state: {
         locationsData: {
-            WelcomePage: {
-                title: "Welcome Page",
-                link: "/",
+            StartPage: {
+                title: "Welcome to Cape Rabbits",
+                link: "/start",
                 isAttended: true,
                 coordinates: "top-[94%] left-[83%]"
             },
@@ -88,11 +88,11 @@ let store = {
         return this._state;
     },
     
-    isLocationAttendedTrueFunc(locationKey) {       
+    setLocationAttendedTrue(locationKey) {       
             this._state.locationsData[locationKey].isAttended = true;        
     },
 
-    // isLocationAbailable(locationKeys) {      debugger  
+    // isLocationAvailable(locationKeys) {      debugger  
     //      // Проверяем, является ли locationKeys массивом и не пустой ли он
     // if (!Array.isArray(locationKeys) || locationKeys.length === 0) {
     //     console.warn('locationKeys is not an array or is empty:', locationKeys);
@@ -111,7 +111,7 @@ let store = {
     // }      
     // },
 
-    isLocationAbailable(locationKeys) {  
+    setLocationAvailableTrue(locationKeys) {  
         if (!Array.isArray(locationKeys) || locationKeys.length === 0) {
             console.warn('locationKeys is not an array or is empty:', locationKeys);
             return;
@@ -125,7 +125,6 @@ let store = {
 
     clearKeys() {
         localStorage.clear();
-
         const clearStatus = (obj) => {
             if (typeof obj === "object" && obj !== null) {
                 if (obj.isAttended !== undefined) {
@@ -137,8 +136,8 @@ let store = {
                 }
             }
         };
-
-        clearStatus(this._state.locationsData);             
+        clearStatus(this._state.locationsData);   
+        window.location.href = '/?rabbit-#' + new Date().getTime() + '-was-just-born!'        
     },
 
    

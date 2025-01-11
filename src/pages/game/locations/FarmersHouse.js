@@ -6,18 +6,17 @@ const FarmersHouse = (props) => {
 
   return (
     <div className="locationMajorHouse">
-      <div className="CommonBg">
-        <GameNavbar />
+      <div className="CommonBg">        
         <PrimaryLocationsVisitCheck 
           state={props.state} 
-          isLocationAttendedTrue={props.isLocationAttendedTrue}
+          setLocationAttendedTrue={props.setLocationAttendedTrue}
           attendedLocationKey={'FarmersHouse'} 
-          isLocationAbailable={props.isLocationAbailable}
-          locationsAbailableAtFirstVisitKey={['SerfersBase', 'MajorsStatue']}
-          locationsAbailableAtNextVisitKey={['WelcomePage']} 
+          setLocationAvailableTrue={props.setLocationAvailableTrue}
+          locationsAvailableAtFirstVisitKeys={['SerfersBase', 'MajorsStatue']}
+          locationsAvailableAtNextVisitKeys={['WelcomePage']} 
           destroyLocation={props.destroyLocation} 
-          locationstoDestroyAtFirstVisitKey={[]} 
-          locationstoDestroyAtNextVisitKey={['MajorsHouse']}
+          locationstoDestroyAtFirstVisitKeys={[]} 
+          locationstoDestroyAtNextVisitKeys={['MajorsHouse']}
           render={(isFirstVisit) => (
             <div className='content'>
               {isFirstVisit ? <FarmersHouseFirstVisitComponent /> : <FarmersHouseNextVisitsComponent />}

@@ -13,19 +13,18 @@ const PrimaryLocationsVisitCheck = (props) => {
     const locationHasVisited = props.state.locationsData[attendedLocationKey].isAttended;    
       
 
-    if (!locationHasVisited) { debugger
+    if (!locationHasVisited) { 
       localStorage.setItem(attendedLocationKey + ' has visited', 'true');
-      props.isLocationAttendedTrue (attendedLocationKey)
+      props.setLocationAttendedTrue(attendedLocationKey)
 
-      props.isLocationAbailable (props.locationsAbailableAtFirstVisitKey)
-      props.destroyLocation (props.locationstoDestroyAtFirstVisitKey)        
-    } else { debugger
-      props.isLocationAbailable (props.locationsAbailableAtNextVisitKey)
-      props.destroyLocation (props.locationstoDestroyAtNextVisitKey)   
+      props.setLocationAvailableTrue(props.locationsAvailableAtFirstVisitKeys)
+      props.destroyLocation(props.locationstoDestroyAtFirstVisitKeys)        
+    } else { 
+      props.setLocationAvailableTrue(props.locationsAvailableAtNextVisitKeys)
+      props.destroyLocation(props.locationstoDestroyAtNextVisitKeys)   
       setIslocationFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние    
       }
   }, [props]);
-
 
   return props.render(islocationFirstVisit);
 };

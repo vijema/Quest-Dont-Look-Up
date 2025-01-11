@@ -1,23 +1,21 @@
 import { NavLink } from 'react-router-dom';
-import GameNavbar from "./../GameNavbar/GameNavbar"
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck"
 
 const MajorsHouse = (props) => { 
 
   return (
     <div className="locationMajorHouse">
-      <div className="CommonBg">
-        <GameNavbar />
+      <div className="CommonBg">        
         <PrimaryLocationsVisitCheck 
           state={props.state} 
-          isLocationAttendedTrue={props.isLocationAttendedTrue}   
+          setLocationAttendedTrue={props.setLocationAttendedTrue}   
           attendedLocationKey={'MajorsHouse'}           
-          isLocationAbailable={props.isLocationAbailable}
-          locationsAbailableAtFirstVisitKey={['Beacon']}
-          locationsAbailableAtNextVisitKey={['FarmersHouse']} 
+          setLocationAvailableTrue={props.setLocationAvailableTrue}
+          locationsAvailableAtFirstVisitKeys={['Beacon']}
+          locationsAvailableAtNextVisitKeys={['FarmersHouse']} 
           destroyLocation={props.destroyLocation} 
-          locationstoDestroyAtFirstVisitKey={['WelcomePage']} 
-          locationstoDestroyAtNextVisitKey={[]} 
+          locationstoDestroyAtFirstVisitKeys={['WelcomePage']} 
+          locationstoDestroyAtNextVisitKeys={[]} 
           render={(isFirstVisit) => (
             <div className='content'>
               {isFirstVisit ? <MajorsHouseFirstVisitComponent /> : <MajorsHouseNextVisitsComponent />}

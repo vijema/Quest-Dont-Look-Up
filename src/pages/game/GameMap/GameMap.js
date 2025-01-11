@@ -1,13 +1,13 @@
 import { useState } from "react";
 import styles from "./GameMap.css";
-import maincss from "./../../../styles/main.css";
 import Map from "../../../img/Map.jpg";
 import LocationItemDots from "./LocationItemDots";
-import store from './../../../Store'
 
-const GameMap = () => {
+
+const GameMap = (props) => {
     const [mapOpen, setMapOpen] = useState(false);
-    const state = store.getState()
+    
+    const state = props.state
     const locKeys = Object.keys(state.locationsData);
     const attendedLocKeys = locKeys.filter(key => state.locationsData[key].isAttended || state.locationsData[key].isAvailable);
     const locElements = attendedLocKeys.map(key => (
@@ -16,15 +16,15 @@ const GameMap = () => {
 
     return (
         <>
-            <button className="btn" onClick={() => setMapOpen(true)}>Open</button>
+            <button className="btn fixed bottom-5 right-5" onClick={() => setMapOpen(true)}>Open map</button>
 
-            <div className={`overlay animated ${mapOpen ? 'show' : ''}`}>
+            <div onClick={() => setMapOpen(false)} className={`overlay animated ${mapOpen ? 'show' : ''}`}>
                 <div className="modal"> 
                 <div className="flex flex-col items-center">
                     <div className="img relative">
                         <img src={Map} className="" alt="logo" />
                         {locElements} 
-                        <svg onClick={() => setMapOpen(false)}   
+                        <svg //вернуть функцию закрытия по клику если нужно закрывать модалку только крестиком
                             className=""                         
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"

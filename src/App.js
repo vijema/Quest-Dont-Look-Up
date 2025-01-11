@@ -1,9 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/main.css"
 import Welcome from "./pages/Welcome"
 import Start from "./pages/game/locations/Start"
 import MajorsHouse from "./pages/game/locations/MajorsHouse"
-import FarmersHouse from './pages/game/locations/FarmersHouse'
+import FarmersHouse from "./pages/game/locations/FarmersHouse"
+import MainNavbar from "./pages/game/MainNavbar/MainNavbar"
 
 // Locatoios dots and annotations
 // Modal map prototype added
@@ -13,24 +14,26 @@ import FarmersHouse from './pages/game/locations/FarmersHouse'
 function App(props) { 
 	
   return (
-    <div className='App'>   
-        <Routes>
-        <Route path="/" element={<Welcome  clearKeys={props.clearKeys}/>} />
-        <Route path="/start" element={<Start/>} />
-        <Route path="/majors-house" element={<MajorsHouse 
-					state={props.state}
-					isLocationAttendedTrue={props.isLocationAttendedTrue}
-          isLocationAbailable={props.isLocationAbailable}
-          destroyLocation={props.destroyLocation} />}
-           />
-        <Route path="/farmers-house" element={<FarmersHouse 
-					state={props.state}
-					isLocationAttendedTrue={props.isLocationAttendedTrue}
-          isLocationAbailable={props.isLocationAbailable}
-          destroyLocation={props.destroyLocation} />}
-           />  
-          
-        </Routes>      
+    <div className='App'> 
+    <Router> 
+        <MainNavbar state={props.state} clearKeys={props.clearKeys}/>             
+        <Routes>            
+            <Route path="/" element={<Welcome  clearKeys={props.clearKeys}/>} />
+            <Route path="/start" element={<Start state={props.state}/>} />
+            <Route path="/majors-house" element={<MajorsHouse 
+			    state={props.state}
+			    setLocationAttendedTrue={props.setLocationAttendedTrue}
+                setLocationAvailableTrue={props.setLocationAvailableTrue}
+                destroyLocation={props.destroyLocation} />}
+            />
+            <Route path="/farmers-house" element={<FarmersHouse 
+				state={props.state}
+				setLocationAttendedTrue={props.setLocationAttendedTrue}
+                setLocationAvailableTrue={props.setLocationAvailableTrue}
+                destroyLocation={props.destroyLocation} />}
+            />           
+        </Routes>   
+        </Router>    
       </div>
     
   );
