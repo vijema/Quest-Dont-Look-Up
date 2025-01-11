@@ -20,13 +20,14 @@ function App(props) {
         <Route path="/majors-house" element={<MajorsHouse 
 					state={props.state}
 					isLocationAttendedTrue={props.isLocationAttendedTrue}
-          additionalLocationsAttended={props.additionalLocationsAttended}
-          gameNavbarNotify={props.gameNavbarNotify} />}
+          isLocationAbailable={props.isLocationAbailable}
+          destroyLocation={props.destroyLocation} />}
            />
         <Route path="/farmers-house" element={<FarmersHouse 
 					state={props.state}
 					isLocationAttendedTrue={props.isLocationAttendedTrue}
-          gameNavbarNotify={props.gameNavbarNotify} />}
+          isLocationAbailable={props.isLocationAbailable}
+          destroyLocation={props.destroyLocation} />}
            />  
           
         </Routes>      

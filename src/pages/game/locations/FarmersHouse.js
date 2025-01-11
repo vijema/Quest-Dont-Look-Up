@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import GameNavbar from "./../GameNavbar/GameNavbar"
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck"
 
@@ -11,7 +11,13 @@ const FarmersHouse = (props) => {
         <PrimaryLocationsVisitCheck 
           state={props.state} 
           isLocationAttendedTrue={props.isLocationAttendedTrue}
-          locationKey={'FarmersHouse'} 
+          attendedLocationKey={'FarmersHouse'} 
+          isLocationAbailable={props.isLocationAbailable}
+          locationsAbailableAtFirstVisitKey={['SerfersBase', 'MajorsStatue']}
+          locationsAbailableAtNextVisitKey={['WelcomePage']} 
+          destroyLocation={props.destroyLocation} 
+          locationstoDestroyAtFirstVisitKey={[]} 
+          locationstoDestroyAtNextVisitKey={['MajorsHouse']}
           render={(isFirstVisit) => (
             <div className='content'>
               {isFirstVisit ? <FarmersHouseFirstVisitComponent /> : <FarmersHouseNextVisitsComponent />}

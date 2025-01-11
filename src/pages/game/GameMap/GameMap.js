@@ -1,16 +1,15 @@
-import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./GameMap.css";
 import maincss from "./../../../styles/main.css";
 import Map from "../../../img/Map.jpg";
-import LocationItemDots from "../GameNavbar/LocationItemDots";
+import LocationItemDots from "./LocationItemDots";
 import store from './../../../Store'
 
 const GameMap = () => {
     const [mapOpen, setMapOpen] = useState(false);
     const state = store.getState()
     const locKeys = Object.keys(state.locationsData);
-    const attendedLocKeys = locKeys.filter(key => state.locationsData[key].isAttended);
+    const attendedLocKeys = locKeys.filter(key => state.locationsData[key].isAttended || state.locationsData[key].isAvailable);
     const locElements = attendedLocKeys.map(key => (
         <LocationItemDots key={state.locationsData[key].title} title={state.locationsData[key].title} link={state.locationsData[key].link} coordinates={state.locationsData[key].coordinates}/>
       ));

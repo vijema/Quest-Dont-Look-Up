@@ -1,0 +1,15 @@
+.mapdot {
+    @apply w-6 h-6 bg-white rounded-full border-4 border-emerald-500 animate-bounce shadow-black shadow-[0_0_10px]       
+}
+
+.mapdotactive {
+    @apply mapdot !border-red-500
+}
+
+.mapdotvisited {
+    @apply mapdot !border-purple-500
+}
+
+.tooltip {
+    @apply text-sm text-white leading-tight px-2 py-0.5 rounded-sm bg-black/70 cursor-default absolute -bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2
+}

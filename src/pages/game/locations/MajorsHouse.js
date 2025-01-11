@@ -1,12 +1,8 @@
-import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import GameNavbar from "./../GameNavbar/GameNavbar"
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck"
 
 const MajorsHouse = (props) => { 
-
-  debugger
-  const additionalLocationKeys = ["Serfers Base", "Beacon Main Door"]
 
   return (
     <div className="locationMajorHouse">
@@ -14,18 +10,17 @@ const MajorsHouse = (props) => {
         <GameNavbar />
         <PrimaryLocationsVisitCheck 
           state={props.state} 
-          isLocationAttendedTrue={props.isLocationAttendedTrue}    
-          additionalLocationsAttended={props.additionalLocationsAttended}           
-          locationKey={'MajorsHouse'} 
-          locationKeys={additionalLocationKeys}  
+          isLocationAttendedTrue={props.isLocationAttendedTrue}   
+          attendedLocationKey={'MajorsHouse'}           
+          isLocationAbailable={props.isLocationAbailable}
+          locationsAbailableAtFirstVisitKey={['Beacon']}
+          locationsAbailableAtNextVisitKey={['FarmersHouse']} 
+          destroyLocation={props.destroyLocation} 
+          locationstoDestroyAtFirstVisitKey={['WelcomePage']} 
+          locationstoDestroyAtNextVisitKey={[]} 
           render={(isFirstVisit) => (
             <div className='content'>
-              {isFirstVisit ? <MajorsHouseFirstVisitComponent /> : 
-                              <MajorsHouseNextVisitsComponent 
-                                  state={props.state} 
-                                  isLocationAttendedTrue={props.isLocationAttendedTrue}
-                                  
-                                  gameNavbarNotify={props.gameNavbarNotify} />}
+              {isFirstVisit ? <MajorsHouseFirstVisitComponent /> : <MajorsHouseNextVisitsComponent />}
             </div>
           )}
         />
@@ -39,18 +34,8 @@ const MajorsHouseFirstVisitComponent = () => {
   return <h1><span style={{color: "pink"}}>Вы посетили дом мэра впервые.</span></h1>;
 };
 
-debugger
 
-
-const MajorsHouseNextVisitsComponent = (props) => {  
-  const  RevealLocations = (props) => {
-    props.state.locationsData.SerfersBase.isAttended = true;
-    props.state.locationsData.Beacon.isAttended = true;
-    props.gameNavbarNotify();
-    } 
-  useEffect(() => {
-    RevealLocations(props); 
-  }, [props]); 
+const MajorsHouseNextVisitsComponent = (props) => {   
 
     return <>
         <h1><span style={{color: "aqua"}}>Вы ранее уже посещали дом мэра.</span></h1>

@@ -11,6 +11,7 @@ let store = {
                 title: "Major's House",
                 //img : {MajorHouse},
                 link: "/majors-house",
+                isAvailable: false,
                 isAttended:
                     localStorage.getItem("MajorsHouse has visited") === "true",
                 coordinates: "top-[79%] left-[83%]"
@@ -20,6 +21,7 @@ let store = {
                 title: "Farmer's House",
                 //img : {FarmerHouse},
                 link: "/farmers-house",
+                isAvailable: false,
                 isAttended:
                     localStorage.getItem("FarmersHouse has visited") === "true",
                 coordinates: "top-[67%] left-[14.5%]"
@@ -27,41 +29,48 @@ let store = {
             SerfersBase: {
                 title: "Serfers Base",
                 link: "/",
+                isAvailable: false,
                 isAttended: false,
                 coordinates: "top-[79%] left-[43%]"
             },
             Beacon: {
                 title: "Beacon Main Door",
                 link: "/",
+                isAvailable: false,
                 isAttended: false,
                 coordinates: "top-[91%] left-[61.1%]",
 
                 BeaconMainDoor: {
                     title: "Beacon Main Door",
                     link: "/",
+                    isAvailable: false,
                     isAttended: true,
                 },
 
                 BeaconBackDoor: {
                     title: "Beacon Back Door",
                     link: "/",
+                    isAvailable: false,
                     isAttended: false,
                 },
             },
-            SecretCave: {
-                title: "Magor's Statue",
-                link: "/",
+            MajorsStatue: {
+                title: "Major's Statue",
+                link: "/majors-statue",
+                isAvailable: false,
                 isAttended: false,
-                coordinates: "top-[30%] left-[30%]",
+                coordinates: "top-[64%] left-[42.3%]",
 
                 CaveMainHall: {
                     title: "Cave Main Hall",
-                    link: "/",
+                    link: "/cave/main-hall",
+                    isAvailable: false,
                     isAttended: false,
                 },
-                BeaconBackDoor: {
+                CaveBeaconBackDoor: {
                     title: "Beacon Back Door",
-                    link: "/",
+                    link: "/cave/beacon-back-door",
+                    isAvailable: false,
                     isAttended: false,
                 },
             },
@@ -74,53 +83,65 @@ let store = {
         ],
     },
 
-    _listeners: [], // Массив для хранения подписчиков
-
-
+    
     getState() {
         return this._state;
     },
     
-
     isLocationAttendedTrueFunc(locationKey) {       
-            this._state.locationsData[locationKey].isAttended = true;
-            this.gameNavbarNotify(); // Уведомляем подписчиков об изменении
-        
+            this._state.locationsData[locationKey].isAttended = true;        
     },
 
-    additionalLocationsAttended(locationKeys) {        
-        for (var i = 0; i < locationKeys.locationKeys.length ; i++ ) this._state.locationsData[i].isAttended = true;        
+    // isLocationAbailable(locationKeys) {      debugger  
+    //      // Проверяем, является ли locationKeys массивом и не пустой ли он
+    // if (!Array.isArray(locationKeys) || locationKeys.length === 0) {
+    //     console.warn('locationKeys is not an array or is empty:', locationKeys);
+    //     return;
+    // }
+
+    // for (var i = 0; i < locationKeys.length; i++) {
+    //     const locationKey = locationKeys[i];
+    //     const locationData = this._state.locationsData[locationKey];
+
+    //     if (locationData) {
+    //         locationData.isAvailable = true;
+    //     } else {
+    //         console.warn(`Location with key ${locationKey} not found.`);
+    //     }
+    // }      
+    // },
+
+    isLocationAbailable(locationKeys) {  
+        if (!Array.isArray(locationKeys) || locationKeys.length === 0) {
+            console.warn('locationKeys is not an array or is empty:', locationKeys);
+            return;
+        }
+        for (var i = 0; i < locationKeys.length ; i++ ) this._state.locationsData[locationKeys[i]].isAvailable = true;  
+    },   
+
+    destroyLocation(locationKeys) {
+        for (var i = 0; i < locationKeys.length ; i++ ) delete this._state.locationsData[locationKeys[i]]
     },
 
     clearKeys() {
         localStorage.clear();
 
-        const clearAttendedStatus = (obj) => {
+        const clearStatus = (obj) => {
             if (typeof obj === "object" && obj !== null) {
                 if (obj.isAttended !== undefined) {
                     obj.isAttended = false;
+                    obj.isAvailable = false;
                 }
                 for (const key in obj) {
-                    clearAttendedStatus(obj[key]);
+                    clearStatus(obj[key]);
                 }
             }
         };
 
-        clearAttendedStatus(this._state.locationsData);   
-        this.gameNavbarNotify(); // Уведомляем подписчиков об изменении     
+        clearStatus(this._state.locationsData);             
     },
 
-    subscribe(listener) {
-        this._listeners.push(listener);
-        // Возвращаем функцию для отписки
-        return () => {
-            this._listeners = this._listeners.filter(l => l !== listener);
-        };
-    },
-
-    gameNavbarNotify() {
-        this._listeners.forEach(listener => listener());
-    },
+   
 
     dispatch(action) {},
 };
