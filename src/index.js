@@ -4,6 +4,8 @@ import App from "./App";
 import store from "./Store";
 
 
+
+// Locations components more universal, Images import incapsulated
 // Logo added, Main sidebar crated, Welcome page cleaned
 // Game map and navbar connected via props
 // Visited locations option added
@@ -20,6 +22,7 @@ root.render(
         setLocationAttendedTrue={store.setLocationAttendedTrue.bind(store)}
         setLocationAvailableTrue={store.setLocationAvailableTrue.bind(store)}
         destroyLocation={store.destroyLocation.bind(store)}
+        setArtifactCollectedTrue={store.setArtifactCollectedTrue.bind(store)}
         clearKeys={store.clearKeys.bind(store)}
     />
 );
