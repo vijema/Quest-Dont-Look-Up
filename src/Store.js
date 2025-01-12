@@ -1,97 +1,217 @@
-let store = {
-    _state: {        
+import FarmerHouseKey from './images/artifacts/Key-01.jpg'
+import Ladder from './images/artifacts/Ladder11.jpg'
+import LighthouseKey from './images/artifacts/KeyLighthouse.jpg'
+import StatueKey from './images/artifacts/KeyStatue.jpg'
+import ChurchKey from './images/artifacts/KeyChurch.jpg'
 
+import { images } from "./ImageState";
+
+
+
+
+
+let store = {
+    _state: {
         locationsData: {
-            WelcomePage: {
-                title: "Welcome Page",
-                link: "/",
+            Start: {                
+                title: "Welcome to Cape Rabbits!",
+                cover: images.Start,
+                link: "/start",
                 isAttended: true,
+                coordinates: "top-[94%] left-[83%]"
             },
             MajorsHouse: {
                 title: "Major's House",
-                //img : {MajorHouse},
+                cover: images.MajorsHouse,
                 link: "/majors-house",
-                isAttended: localStorage.getItem("MajorsHouse has visited") === "true",
+                isAvailable: false,
+                isAttended:
+                    localStorage.getItem("MajorsHouse has visited") === "true",
+                coordinates: "top-[79%] left-[83%]"
             },
-            FarmersHouse: {
-                //loc : FarmerHouse,
+            FarmersHouse: {                
                 title: "Farmer's House",
-                //img : {FarmerHouse},
+                cover: images.FarmersHouse,
                 link: "/farmers-house",
-                isAttended: localStorage.getItem("FarmersHouse has visited") === "true",
+                isAvailable: false,
+                isAttended:
+                    localStorage.getItem("FarmersHouse has visited") === "true",
+                coordinates: "top-[67%] left-[14.5%]"
             },
-            SerfersBase: {
-                title: "Serfers Base",
+            SurfersBase: {
+                title: "Surfers Base",
+                cover: images.SurfersBase,
                 link: "/",
-                isAttended: true,
-            },
-            Beacon: {                
-                title: "Beacon Main Door",
-                link: "/",
+                isAvailable: false,
                 isAttended: false,
-            
-                BeaconMainDoor: {
-                    title: "Beacon Main Door",
+                coordinates: "top-[79%] left-[43%]"
+            },
+            SurfersYard: {
+                title: "Surfers Yard",
+                cover: images.SurfersYard,
+                link: "/",
+                isAvailable: true,
+                isAttended: false,
+                coordinates: "top-[87.5%] left-[50%]"
+            },
+            ChurchYard: {
+                title: "Church Courtyard",
+                cover: images.ChurchYard,
+                link: "/church-yard",
+                isAvailable: true,
+                isAttended: false,
+                coordinates: "top-[46.5%] left-[19.5%]"
+            },
+            Lighthouse: {
+                title: "Point Bunnita Lighthouse",
+                cover: images.Lighthouse,
+                link: "/lighthouse",
+                isAvailable: false,
+                isAttended: false,
+                coordinates: "top-[91%] left-[61.1%]",
+
+                LighthouseMainDoor: {
+                    title: "Lighthouse Main Door",                    
                     link: "/",
+                    isAvailable: false,
                     isAttended: true,
                 },
 
-                BeaconBackDoor: {
-                    title: "Beacon Back Door",
+                LighthouseBackDoor: {
+                    title: "Lighthouse Back Door",
                     link: "/",
-                    isAttended: false,
-                }, 
-            
-            },
-            SecretCave: {
-                CaveMainHall: {
-                    title: "Cave Main Hall",
-                    link: "/",
+                    isAvailable: false,
                     isAttended: false,
                 },
-                BeaconBackDoor: {
-                    title: "Beacon Back Door",
-                    link: "/",
+            },
+            MajorsStatue: {
+                title: "Major's Statue",                
+                link: "/majors-statue",
+                isAvailable: false,
+                isAttended: false,
+                coordinates: "top-[64%] left-[42.3%]",
+
+                CaveMainHall: {
+                    title: "Cave Main Hall",
+                    link: "/cave/main-hall",
+                    isAvailable: false,
+                    isAttended: false,
+                },
+                CaveLighthouseBackDoor: {
+                    title: "Lighthouse Back Door",
+                    link: "/cave/Lighthouse-back-door",
+                    isAvailable: false,
                     isAttended: false,
                 },
             },
         },
 
-        collectedArtifacts: [
-            { isMajorLettr: false },
-            { isBeaconKey: false },
-            { isLadder: false },
-        ],
+        collectedArtifacts: {
+            isMajorsHouseKey: {
+                title: "The key from the Major's house",
+                image: {FarmerHouseKey},
+                isCollected: false,
+            },
+            isMajorLetter: {
+                title: "Letter from Major",
+                image: {FarmerHouseKey},
+                isCollected: false,
+            },
+            isLadder: {
+                title: "Ladder",
+                image: {Ladder},
+                isCollected: false,
+            },
+            isLighthouseKey: {
+                title: "The key with the Lighthouse image on the keychain",
+                image: {LighthouseKey},
+                isCollected: false,
+            },
+            isStatueKey: {
+                title: "The key with the man in a hood image on the keychain",
+                image: {StatueKey},
+                isCollected: false,
+            },  
+            isChurchKey: {
+                title: "The key with the orthodox cross image on the keychain",
+                image: {ChurchKey},
+                isCollected: false,
+            },       
+        },
+
     },
 
+    
     getState() {
         return this._state;
-    },    
+    },
     
-    isLocationAttendedTrueFunc(locationKey) {        
-        if (this._state.locationsData[locationKey]) {
-          this._state.locationsData[locationKey].isAttended = true;
+    setLocationAttendedTrue(locationKey) {       
+            this._state.locationsData[locationKey].isAttended = true;        
+    },
+
+    // isLocationAvailable(locationKeys) {      debugger  
+    //      // Проверяем, является ли locationKeys массивом и не пустой ли он
+    // if (!Array.isArray(locationKeys) || locationKeys.length === 0) {
+    //     console.warn('locationKeys is not an array or is empty:', locationKeys);
+    //     return;
+    // }
+
+    // for (var i = 0; i < locationKeys.length; i++) {
+    //     const locationKey = locationKeys[i];
+    //     const locationData = this._state.locationsData[locationKey];
+
+    //     if (locationData) {
+    //         locationData.isAvailable = true;
+    //     } else {
+    //         console.warn(`Location with key ${locationKey} not found.`);
+    //     }
+    // }      
+    // },
+
+    setLocationAvailableTrue(locationKeys) {  
+        if (!Array.isArray(locationKeys) || locationKeys.length === 0) {
+            console.warn('locationKeys is not an array or is empty:', locationKeys);
+            return;
         }
-      },
+        for (var i = 0; i < locationKeys.length ; i++ ) this._state.locationsData[locationKeys[i]].isAvailable = true;  
+    },   
+
+    destroyLocation(locationKeys) {
+        for (var i = 0; i < locationKeys.length ; i++ ) delete this._state.locationsData[locationKeys[i]]
+    },
+
+    setArtifactCollectedTrue(artifactKeys) {  
+        if (!Array.isArray(artifactKeys) || artifactKeys.length === 0) {
+            console.warn('artifactKeys is not an array or is empty:', artifactKeys);
+            return;
+        }
+        for (var i = 0; i < artifactKeys.length ; i++ ) this._state.collectedArtifacts[artifactKeys[i]].isCollected = true;  
+    }, 
 
     clearKeys() {
-      const clearAttendedStatus = (obj) => {
-        if (typeof obj === 'object' && obj !== null) {
-          if (obj.isAttended !== undefined) {
-            obj.isAttended = false;
-          }
-          for (const key in obj) {
-            clearAttendedStatus(obj[key]);
-          }
-        }
-      };
-    
-      clearAttendedStatus(this._state.locationsData);
-      localStorage.clear();
+        localStorage.clear();
+        const clearStatus = (obj) => {
+            if (typeof obj === "object" && obj !== null) {
+                if (obj.isAttended !== undefined && obj.isAvailable !== undefined && obj.isCollected !== undefined) {
+                    obj.isAttended = false;
+                    obj.isAvailable = false;
+                    obj.isCollected = false;
+                }
+                for (const key in obj) {
+                    clearStatus(obj[key]);
+                }
+            }
+        };
+        clearStatus(this._state.locationsData, this._state.collectedArtifacts);   
+        window.location.href = '/?rabbit-#' + new Date().getTime() + '-was-just-born!'        
     },
+
+   
 
     dispatch(action) {},
 };
 
 export default store;
 window.store = store;
+
