@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 
-const PrimaryLocationsVisitCheck = (props) => {
+const ItemOwnershipCheck = (props) => {
 
   const [isOwnItem, setIsOwnItem] = useState(false); 
 
@@ -10,7 +10,7 @@ const PrimaryLocationsVisitCheck = (props) => {
     const collectedArtifactKey = props.collectedArtifactKey;
     const isItemCollected = props.state.collectedArtifacts[collectedArtifactKey].isCollected;     
 
-    if (!isItemCollected) { 
+    if (isItemCollected) { 
       localStorage.setItem(collectedArtifactKey + ' collected', 'true');
       props.setLocationAttendedTrue(collectedArtifactKey)
 
@@ -28,7 +28,7 @@ const PrimaryLocationsVisitCheck = (props) => {
 
 
 
-export default PrimaryLocationsVisitCheck;
+export default ItemOwnershipCheck;
           
 
 

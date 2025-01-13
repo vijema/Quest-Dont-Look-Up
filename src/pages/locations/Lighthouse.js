@@ -7,45 +7,56 @@ const Lighthouse = (props) => {
     return (
         <main className="section">
             <div className="container">
-                <div className="project-details">
-                    <img src={props.state.locationsData[location].cover} className="project-details__cover" alt="cover" />
-                    <div className="title-3">{props.state.locationsData[location].title}</div>
-                    <PrimaryLocationsVisitCheck
-                        state={props.state}
-                        setLocationAttendedTrue={props.setLocationAttendedTrue}
-                        attendedLocationKey={location}
-                        setLocationAvailableTrue={props.setLocationAvailableTrue}
-                        locationsAvailableAtFirstVisitKeys={[]}
-                        locationsAvailableAtNextVisitKeys={[]}
-                        destroyLocation={props.destroyLocation}
-                        locationstoDestroyAtFirstVisitKeys={[]}
-                        locationstoDestroyAtNextVisitKeys={[]}
-                        render={(isFirstVisit) => (
-                            <div className="project-details__text">
-                                {isFirstVisit ? <MajorsHouseFirstVisitComponent /> : <MajorsHouseFirstVisitComponent />}
-                            </div>
-                        )}
-                    />
-                </div>
+                <PrimaryLocationsVisitCheck
+                    state={props.state}
+                    setLocationAttendedTrue={props.setLocationAttendedTrue}
+                    attendedLocationKey={location}
+                    setLocationAvailableTrue={props.setLocationAvailableTrue}
+                    locationsAvailableAtFirstVisitKeys={[]}
+                    locationsAvailableAtNextVisitKeys={[]}
+                    switchLocatonVisibility={props.switchLocatonVisibility}
+                    switchLocatonVisibilityAtFirstVisitKeys={[]}
+                    switchLocatonVisibilityAtNextVisitKeys={[]}
+                    destroyLocation={props.destroyLocation}
+                    locationstoDestroyAtFirstVisitKeys={[]}
+                    locationstoDestroyAtNextVisitKeys={[]}
+                    setArtifactCollectedTrue={props.setArtifactCollectedTrue}
+                    //collectedArtifactKey={artifact}
+                    render={(isFirstVisit) => isFirstVisit
+                        ? <LighthouseFirstVisitComponent state={props.state} location={location} /> 
+                        : <LighthouseNextVisitsComponent state={props.state} location={location} /> 
+                    }
+                />
             </div>
         </main>
     );
 };
 
-const MajorsHouseFirstVisitComponent = () => {
-    return <p>Lighthouse</p>;
-};
-
-const MajorsHouseNextVisitsComponent = (props) => {
+const LighthouseFirstVisitComponent = (props) => {
     return (
-        <>
+        <div className="project-details">
+            <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
+            <div className="title-3">{props.state.locationsData[props.location].title}</div>
             <div className="project-details__text">
-                <span style={{ color: "aqua" }}>Вы ранее уже посещали дом мэра.</span>
+                <p>
+                First visit.
+                </p>
             </div>
-            <NavLink className="btn" to="/farmers-house">
-                Visit Farmer's house
-            </NavLink>
-        </>
+        </div>
+    );
+}
+
+const LighthouseNextVisitsComponent = (props) => {
+    return (
+        <div className="project-details">
+            <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
+            <div className="title-3">{props.state.locationsData[props.location].title}</div>
+            <div className="project-details__text">
+                <p>
+                Second visit.
+                </p>
+            </div>
+        </div>
     );
 };
 

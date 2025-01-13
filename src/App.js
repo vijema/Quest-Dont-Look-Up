@@ -9,10 +9,6 @@ import Lighthouse from "./pages/locations/Lighthouse";
 import MainNavbar from "./components/MainNavbar/MainNavbar";
 import GameMap from "./pages/components/GameMap/GameMap";
 
-// Locatoios dots and annotations
-// Modal map prototype added
-// Some location items components added as list via array
-// Local storage stable work beta v1
 
 const App = (props) => {
     return (
@@ -20,8 +16,10 @@ const App = (props) => {
             <MainLayout
                 state={props.state}
                 setLocationAttendedTrue={props.setLocationAttendedTrue}
-                setLocationAvailableTrue={props.setLocationAvailableTrue}
+                setLocationAvailableTrue={props.setLocationAvailableTrue} 
+                switchLocatonVisibility={props.switchLocatonVisibility}               
                 destroyLocation={props.destroyLocation}
+                setArtifactCollectedTrue={props.setArtifactCollectedTrue}
                 clearKeys={props.clearKeys}
             />
         </Router>
@@ -34,7 +32,7 @@ const MainLayout = (props) => {
     return (
         <div className="App">
             <MainNavbar state={props.state} clearKeys={props.clearKeys} />
-            {location.pathname !== "/" && location.pathname !== "/start" && <GameMap state={props.state} />}
+            
             <Routes>
                 <Route exact path="/" element={<Welcome clearKeys={props.clearKeys} />} />
                 <Route path="/start" element={<Start state={props.state} />} />
@@ -45,7 +43,9 @@ const MainLayout = (props) => {
                             state={props.state}
                             setLocationAttendedTrue={props.setLocationAttendedTrue}
                             setLocationAvailableTrue={props.setLocationAvailableTrue}
+                            switchLocatonVisibility={props.switchLocatonVisibility}
                             destroyLocation={props.destroyLocation}
+                            setArtifactCollectedTrue={props.setArtifactCollectedTrue}
                         />
                     }
                 />
@@ -56,6 +56,7 @@ const MainLayout = (props) => {
                         state={props.state}
                             setLocationAttendedTrue={props.setLocationAttendedTrue}
                             setLocationAvailableTrue={props.setLocationAvailableTrue}
+                            switchLocatonVisibility={props.switchLocatonVisibility}
                             destroyLocation={props.destroyLocation}
                             setArtifactCollectedTrue={props.setArtifactCollectedTrue}
                         />
@@ -68,6 +69,7 @@ const MainLayout = (props) => {
                             state={props.state}
                             setLocationAttendedTrue={props.setLocationAttendedTrue}
                             setLocationAvailableTrue={props.setLocationAvailableTrue}
+                            switchLocatonVisibility={props.switchLocatonVisibility}
                             destroyLocation={props.destroyLocation}
                             setArtifactCollectedTrue={props.setArtifactCollectedTrue}
                         />
@@ -80,6 +82,7 @@ const MainLayout = (props) => {
                             state={props.state}
                             setLocationAttendedTrue={props.setLocationAttendedTrue}
                             setLocationAvailableTrue={props.setLocationAvailableTrue}
+                            switchLocatonVisibility={props.switchLocatonVisibility}
                             destroyLocation={props.destroyLocation}
                             setArtifactCollectedTrue={props.setArtifactCollectedTrue}
                         />
@@ -88,6 +91,7 @@ const MainLayout = (props) => {
                 <Route path="*" element={<Navigate to="/" />} />
                 {/* <Route path="*" element={<NotFound />} />       */}
             </Routes>
+            {location.pathname !== "/" && location.pathname !== "/start" && <GameMap state={props.state}/>}
         </div>
     );
 };

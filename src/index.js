@@ -4,6 +4,9 @@ import App from "./App";
 import store from "./Store";
 
 
+// switchLocatonVisibility func added
+// Visited locations style assigning logic symplified
+// clearKeys func simplyfied
 
 // Locations components more universal, Images import incapsulated
 // Logo added, Main sidebar crated, Welcome page cleaned
@@ -21,8 +24,9 @@ root.render(
         state={store.getState()}
         setLocationAttendedTrue={store.setLocationAttendedTrue.bind(store)}
         setLocationAvailableTrue={store.setLocationAvailableTrue.bind(store)}
+        switchLocatonVisibility={store.switchLocatonVisibility.bind(store)}
         destroyLocation={store.destroyLocation.bind(store)}
-        setArtifactCollectedTrue={store.setArtifactCollectedTrue.bind(store)}
-        clearKeys={store.clearKeys.bind(store)}
+        setArtifactCollectedTrue={store.setArtifactCollectedTrue.bind(store)}        
+        clearKeys={store.clearKeys.bind(store)}        
     />
 );
