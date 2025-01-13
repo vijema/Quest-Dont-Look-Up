@@ -61,13 +61,15 @@ body {
 	/* Light mode */
 	background-color: var(--page-bg);
 	color: var(--text-color);
+	
+	scrollbar-width: none;
 }
 
 #root {min-height: 100vh;}
 
 .App {min-height: 100vh;
 	 display: flex;
-	 flex-direction: column;
+	 flex-direction: column;	 
 	}
 
 /* General */
@@ -478,4 +480,20 @@ body {
 .btn-outline:active {
 	position: relative;
 	top: 1px;
+}
+
+
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+}
+.fade-exit {
+    opacity: 1;
+}
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
 }

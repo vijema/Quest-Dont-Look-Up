@@ -4,49 +4,49 @@ let store = {
     _state: {
         locationsData: {
             Start: {
-                title: "Welcome to Cape Rabbits!",
-                cover: images.locationCovers.Start,
-                link: "/start",
+                title: "Welcome to Cape Rabbits!", 
                 isAvailable: true,
                 isAttended: true,
                 isHidden: false,
                 coordinates: "top-[94%] left-[83%]",
+                link: "/start",
+                cover: images.locationCovers.Start,
             },
             MajorsHouse: {
                 title: "Major's House",
-                cover: images.locationCovers.MajorsHouse,
-                link: "/majors-house",
                 isAvailable: false,
                 isAttended: localStorage.getItem("MajorsHouse has visited") === "false",
                 isHidden: false,
                 coordinates: "top-[79%] left-[83%]",
+                cover: images.locationCovers.MajorsHouse,
+                link: "/majors-house",
             },
             FarmersHouse: {
-                title: "Farmer's House",
-                cover: images.locationCovers.FarmersHouse,
-                link: "/farmers-house",
+                title: "Farmer's House",                
                 isAvailable: false,
                 isAttended: localStorage.getItem("FarmersHouse has visited") === "false",
                 isHidden: false,
                 coordinates: "top-[67%] left-[14.5%]",
+                link: "/farmers-house",
+                cover: images.locationCovers.FarmersHouse,                
             },
             SurfersBase: {
-                title: "Surfers Base",
-                cover: images.locationCovers.SurfersBase,
-                link: "/",
+                title: "Surfers Base",                
                 isAvailable: false,
                 isAttended: false,
                 isHidden: false,
                 coordinates: "top-[79%] left-[43%]",
+                link: "/",
+                cover: images.locationCovers.SurfersBase,                
             },
             SurfersYard: {
-                title: "Surfers Yard",
-                cover: images.locationCovers.SurfersYard,
-                link: "/",
+                title: "Surfers Yard",                
                 isAvailable: false,
                 isAttended: false,
                 isHidden: false,
                 coordinates: "top-[87.5%] left-[50%]",
+                link: "/",
+                cover: images.locationCovers.SurfersYard,                
             },
             ChurchYard: {
                 title: "Church Courtyard",
@@ -58,13 +58,13 @@ let store = {
                 coordinates: "top-[46.5%] left-[19.5%]",
             },
             Lighthouse: {
-                title: "Point Bunnita Lighthouse",
-                cover: images.locationCovers.Lighthouse,
-                link: "/lighthouse",
+                title: "Point Bunnita Lighthouse",                
                 isAvailable: false,
                 isAttended: false,
                 isHidden: false,
-                coordinates: "top-[91%] left-[61.1%]",
+                coordinates: "top-[91%] left-[61.36%]",
+                link: "/lighthouse",
+                cover: images.locationCovers.Lighthouse,
 
                 LighthouseMainDoor: {
                     title: "Lighthouse Main Door",
@@ -83,12 +83,12 @@ let store = {
                 },
             },
             MajorsStatue: {
-                title: "Major's Statue",
-                link: "/majors-statue",
+                title: "Major's Statue",                
                 isAvailable: false,
                 isAttended: false,
                 isHidden: false,
                 coordinates: "top-[64%] left-[42.3%]",
+                link: "/majors-statue",
 
                 CaveMainHall: {
                     title: "Cave Main Hall",
@@ -162,7 +162,7 @@ let store = {
     switchLocatonVisibility(locationKeys) {
         
         if (!Array.isArray(locationKeys) || locationKeys.length === 0) {
-            console.warn("locationKeys to hide is not an array or is empty:", locationKeys);
+            console.warn("locationKeys to change visibility is not an array or is empty:", locationKeys);
             return;
         }
        

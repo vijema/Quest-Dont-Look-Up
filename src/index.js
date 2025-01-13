@@ -4,6 +4,9 @@ import App from "./App";
 import store from "./Store";
 
 
+// Scrollbar hidden
+// Location dots state info update bug fixed
+
 // switchLocatonVisibility func added
 // Visited locations style assigning logic symplified
 // clearKeys func simplyfied

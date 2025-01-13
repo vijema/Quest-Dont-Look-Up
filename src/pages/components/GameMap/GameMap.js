@@ -1,24 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import styles from "./GameMap.css";
 import Map from "../../../img/Map.jpg";
 import LocationItemDots from "./LocationItemDots";
 
 const GameMap = (props) => {
     const [mapOpen, setMapOpen] = useState(false);
+    const [locElements, setLocElements] = useState([]);
 
-    const state = props.state;
-    const locKeys = Object.keys(state.locationsData);
-    const attendedLocKeys = locKeys.filter((key) => (state.locationsData[key].isAttended || state.locationsData[key].isAvailable) && !state.locationsData[key].isHidden);
-    const locElements = attendedLocKeys.map((key) => (
-        <LocationItemDots
-            key={state.locationsData[key].title}
-            title={state.locationsData[key].title}
-            link={state.locationsData[key].link}
-            coordinates={state.locationsData[key].coordinates}
-            isVisited={state.locationsData[key].isAttended}
-        />
-    ));
+    useEffect(() => {
+        const state = props.state;
+        const locKeys = Object.keys(state.locationsData);
+        const attendedLocKeys = locKeys.filter((key) => 
+            (state.locationsData[key].isAttended || state.locationsData[key].isAvailable) && 
+            !state.locationsData[key].isHidden
+        );
 
+        const elements = attendedLocKeys.map((key) => (
+            <LocationItemDots
+                key={state.locationsData[key].title}
+                title={state.locationsData[key].title}
+                link={state.locationsData[key].link}
+                coordinates={state.locationsData[key].coordinates}
+                isVisited={state.locationsData[key].isAttended}
+            />
+        ));
+
+        setLocElements(elements);
+    }, [props]);
+    
     return (
         <>
             <button className="btn fixed bottom-5 right-5" onClick={() => setMapOpen(true)}>

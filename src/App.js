@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import "./styles/main.css";
 import Welcome from "./pages/Welcome";
 import Start from "./pages/locations/Start";
@@ -10,7 +11,11 @@ import MainNavbar from "./components/MainNavbar/MainNavbar";
 import GameMap from "./pages/components/GameMap/GameMap";
 
 
+
+
 const App = (props) => {
+
+   
     return (
         <Router>
             <MainLayout
@@ -32,6 +37,8 @@ const MainLayout = (props) => {
     return (
         <div className="App">
             <MainNavbar state={props.state} clearKeys={props.clearKeys} />
+
+          
             
             <Routes>
                 <Route exact path="/" element={<Welcome clearKeys={props.clearKeys} />} />
@@ -91,6 +98,7 @@ const MainLayout = (props) => {
                 <Route path="*" element={<Navigate to="/" />} />
                 {/* <Route path="*" element={<NotFound />} />       */}
             </Routes>
+       
             {location.pathname !== "/" && location.pathname !== "/start" && <GameMap state={props.state}/>}
         </div>
     );
