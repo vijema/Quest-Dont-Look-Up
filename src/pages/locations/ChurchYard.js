@@ -34,7 +34,7 @@ const ChurchYard = (props) => {
 
 const ChurchYardFirstVisitComponent = (props) => {
     return (
-        <div className="project-details">
+        <div className="project-details-row">
             <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
             <div className="title-3">{props.state.locationsData[props.location].title}</div>
             <div className="project-details__text">
@@ -48,14 +48,15 @@ const ChurchYardFirstVisitComponent = (props) => {
 
 const ChurchYardNextVisitsComponent = (props) => {
     return (
-        <div className="project-details">
+        <div className="project-details-row">
             <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
+            <div className="project-details__content">
             <div className="title-3">{props.state.locationsData[props.location].title}</div>
             <div className="project-details__text">
                 <p>
                     Second visit.
                 </p>
-            </div>
+            </div></div>
         </div>
     );
 };

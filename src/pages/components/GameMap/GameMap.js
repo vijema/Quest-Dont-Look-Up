@@ -1,20 +1,17 @@
 import { useState, useEffect } from 'react';
-import styles from "./GameMap.css";
+import styles from "./GameMap.module.css";
 import Map from "../../../img/Map.jpg";
 import LocationItemDots from "./LocationItemDots";
 
 const GameMap = (props) => {
     const [mapOpen, setMapOpen] = useState(false);
     const [locElements, setLocElements] = useState([]);
-
-    useEffect(() => {
+    
         const state = props.state;
         const locKeys = Object.keys(state.locationsData);
         const attendedLocKeys = locKeys.filter((key) => 
-            (state.locationsData[key].isAttended || state.locationsData[key].isAvailable) && 
-            !state.locationsData[key].isHidden
+            (state.locationsData[key].isAttended || state.locationsData[key].isAvailable) && !state.locationsData[key].isHidden
         );
-
         const elements = attendedLocKeys.map((key) => (
             <LocationItemDots
                 key={state.locationsData[key].title}
@@ -24,9 +21,10 @@ const GameMap = (props) => {
                 isVisited={state.locationsData[key].isAttended}
             />
         ));
-
+        
+    useEffect(() => {
         setLocElements(elements);
-    }, [props]);
+    }, [elements]);
     
     return (
         <>
@@ -35,14 +33,14 @@ const GameMap = (props) => {
             </button>
 
             <div //вернуть функцию закрытия по клику если нужно закрывать модалку при любом клике
-             className={`overlay animated ${mapOpen ? "show" : ""}`}>
-                <div className="modal">
+             className={`${styles.overlay} ${styles.animated} ${mapOpen ? `${styles.show}` : ""}`}>
+                <div className={styles.modal}>
                     <div className="flex flex-col items-center">
                         <div className="img relative">
-                            <img src={Map} className="" alt="logo" />
+                            <img src={Map} className={styles.img} alt="map" />
                             {locElements}
                             <svg onClick={() => setMapOpen(false)} //вернуть функцию закрытия по клику если нужно закрывать модалку только крестиком
-                                className=""
+                                className={styles.svg}
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                             >

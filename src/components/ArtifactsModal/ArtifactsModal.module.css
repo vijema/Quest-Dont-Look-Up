@@ -1,0 +1,63 @@
+.nav { 
+    @apply w-full bg-black shadow-2xl gap-5 p-5;  
+}
+
+.item {   
+    color:aliceblue;
+    text-decoration: none;    
+    
+}
+.item a {
+    color:aliceblue;
+    text-decoration: none;
+}
+
+.itemactive {
+    color:gold;
+}
+
+
+.overlay {    
+    position: fixed;
+    top: 0;  
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  
+}
+
+.modal {  
+    width: 100%; 
+    height: 80px;     
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0%);    
+    transition: all 0.5s ease-in-out;    
+}
+
+
+.overlay.animated {
+    opacity: 0;
+    visibility: hidden;
+
+    .modal {
+        opacity: 0;
+        visibility: hidden;
+       transform: translate(-50%, 0%);
+        transition-delay: 0.2s;
+        
+    }
+
+    &.show {
+        opacity: 1;
+        visibility: visible;
+
+        .modal {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, 0%);        
+        }
+    }
+}

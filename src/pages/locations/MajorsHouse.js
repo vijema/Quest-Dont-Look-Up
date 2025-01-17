@@ -35,8 +35,10 @@ const MajorsHouse = (props) => {
 
 const MajorsHouseFirstVisitComponent = (props) => {
     return (
-        <div className="project-details">
+        <div className="project-details-col">
+            
             <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
+            <div className="project-details__content">
             <div className="title-3">{props.state.locationsData[props.location].title}</div>
             <div className="project-details__text">
                 <p>
@@ -48,14 +50,17 @@ const MajorsHouseFirstVisitComponent = (props) => {
                     house is at your complete disposal.
                 </p>
             </div>
+            </div>
         </div>
     );
 };
 
 const MajorsHouseNextVisitsComponent = (props) => {
     return (
-        <div className="project-details">
+        <div className="project-details-col">
+            
             <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
+            <div className="project-details__content">
             <div className="title-3">{props.state.locationsData[props.location].title}</div>
             <div className="project-details__text">
                 <span style={{ color: "aqua" }}>Вы ранее уже посещали дом мэра.</span>
@@ -63,6 +68,7 @@ const MajorsHouseNextVisitsComponent = (props) => {
             <NavLink className="btn" to="/farmers-house">
                 Visit Farmer's house
             </NavLink>
+        </div>
         </div>
     );
     };

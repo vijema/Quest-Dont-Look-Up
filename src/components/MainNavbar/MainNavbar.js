@@ -5,7 +5,7 @@ import Logo from "../../img/logo-white-fat-frame.png";
 const MainNavbar = (props) => { 
     return ( 
             <nav className="nav">
-                <div className="container">
+                <div className="px-5">
                     <div className="nav-row">
                         <NavLink to='/' className="flex gap-4 items-center">
                             <img src={Logo} className="w-12 h-12" alt="logo"/>

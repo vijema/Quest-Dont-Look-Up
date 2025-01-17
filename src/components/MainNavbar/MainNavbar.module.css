@@ -1,10 +1,5 @@
-.nav {
-    display: block;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 20px;
-    
+.nav { 
+    @apply w-full bg-black shadow-2xl gap-5 p-5;  
 }
 
 .item {   
@@ -20,3 +15,4 @@
 .itemactive {
     color:gold;
 }
+
