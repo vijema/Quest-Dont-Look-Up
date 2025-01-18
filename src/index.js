@@ -4,6 +4,11 @@ import App from "./App";
 import store from "./Store";
 
 
+
+// Content box and dialog box added
+// Modal topbar
+// Full screen pictures concept returned, bg images added
+
 // Scrollbar hidden
 // Location dots state info update bug fixed
 

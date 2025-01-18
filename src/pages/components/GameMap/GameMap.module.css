@@ -1,12 +1,12 @@
 .overlay {
     position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
     background-color: rgba(0, 0, 0, 0.7);
-    transition: all 0.5s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
 
 .modal {  
@@ -16,15 +16,13 @@
     left: 50%;
     top: 30%;
     transform: translate(-50%, -30%);    
-    transition: all 0.5s ease-in-out;
+    transition: all 0.4s ease-in-out;
 
     img {
         @apply mx-auto w-[300px] h-[408px] xs:w-[420px] xs:h-[571px] sm:w-[620px] sm:h-[842px];
         position: relative;        
         border-radius: 5px;
-        border: 10px solid white;        
-        
-        
+        border: 10px solid white; 
     }
 
     svg {
@@ -38,8 +36,6 @@
     }
 }
 
-
-
 .overlay.animated {
     opacity: 0;
     visibility: hidden;
@@ -48,8 +44,7 @@
         opacity: 0;
         visibility: hidden;
         transform: translate(-50%, -30%);
-        transition-delay: 0.2s;
-        
+        transition-delay: 0.4s;        
     }
 
     &.show {

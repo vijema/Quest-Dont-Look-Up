@@ -13,7 +13,7 @@
 	--white: #fff;
 	--light-grey: #f0f0f0;
 	--lilac: #5c62ec;
-	--purple: #8627df;
+	--purple: #ed70fd;
 
 	/* Nav */
 	--nav-bg: var(--black);
@@ -255,47 +255,70 @@ body {
 
 /* Project details */
 
+
 .project-details {
+	@apply flex text-justify  m-0 p-0 left-0 top-0 right-0 bottom-0;
+	
+}
+
+/* .project-details {
 	@apply flex text-justify mx-auto my-0 p-4 rounded-xl ;
 	box-shadow: var(--box-shadow);
+} */
+
+.project-details__cover {
+	position: fixed; /* Фиксирует изображение на экране */
+    top: 0; /* Устанавливает верхнюю границу */
+    left: 0; /* Устанавливает левую границу */
+    width: 100vw; /* Ширина 100% от ширины окна */
+    height: 100vh; /* Высота 100% от высоты окна */
+    object-fit: cover; /* Сохраняет пропорции изображения и заполняет контейнер */
+    z-index: 0;		
 }
 
-.project-details-row {
-	@apply project-details gap-6 items-start justify-start relative h-[87vh] w-[1100px];
+.dialog-container {
+	@apply w-full flex flex-1 flex-col p-3 pt-0 gap-3 items-center justify-start
+}
 
-	.project-details__cover {
-		height: 100%;
-    	
-    	
-			
-	}
-} 
+.dialog-wrapper-right {
+	@apply flex flex-row-reverse justify-start items-end w-full mb-3
+}
 
-.project-details-col {
-	@apply project-details gap-6 items-center justify-start h-[87vh] max-w-[1300px];
+.dialog-wrapper-left {
+	@apply flex justify-start items-end w-full mb-3
+}
 
-	.project-details__cover {
-		height: 100%;
-    			
-	}
-} 
+.dialogBubble {
+	@apply absolute z-10 flex flex-col items-center justify-center text-black/90 font-medium text-md text-center leading-none
+	bg-white/90 p-5 gap-3 rounded-3xl border-black border-4	shadow-black/70 shadow-lg 
+}
 
+.dialogBubbleRight {
+	@apply max-w-[95%] flex flex-col items-start justify-center text-black font-normal text-md text-left leading-5
+	bg-white/90 py-4 px-5 gap-1 rounded-3xl border-black border-2 shadow-black/50 shadow-lg 
+}
+
+.dialogBubbleLeft {
+	@apply max-w-[95%] flex flex-col flex-1 items-start justify-center text-black/90 font-normal text-md text-left leading-5
+	bg-white/90 py-4 px-5 gap-1 rounded-3xl border-black border-2	shadow-black/50 shadow-lg
+}
+
+.dialogBubbleSmall {
+	@apply text-black/90 bg-white/90 -mb-3 border-black border-2 shadow-black/50 shadow-lg rounded-full 
+	w-8 h-8 p-0
+}
 
 .project-details__content {
-	@apply flex flex-col items-center justify-start w-full p-3
+	@apply absolute flex flex-col items-center justify-start py-8 px-5 pt-10 gap-3
+	bg-gray-900/80 rounded-xl shadow-black/70 shadow-lg
 }
-
-/* .project-details__cover {
-	@apply max-w-full min-w-full mb-3;
-		
-} */
 
 .project-details__desc {
 	@apply text-md py-0 px-2 font-bold leading-normal;		
 }
 
 .project-details__text {
-	@apply text-base py-0 px-2 font-medium leading-normal;
+	@apply  text-gray-100 text-lg p-4 pt-2 font-medium leading-normal;
 }
 
 .project-details__combo {
@@ -522,3 +545,73 @@ body {
     opacity: 0;
     transition: opacity 300ms;
 }
+
+
+/* 
+.Start {
+    --img-bg: url('../images/MainLocations/Start.jpg');
+}
+.BayArea {
+    --img-bg: url('../images/MainLocations/BayArea.jpg');
+}
+.MajorsSratue {
+    --img-bg: url('../images/MainLocations/MajorsSratue.jpg');
+}
+.FarmersHouse {
+    --img-bg: url('../images/MainLocations/FarmersHouse.jpg');
+}
+.Beacon {
+    --img-bg: url('../images/MainLocations/Beacon.jpg');
+}
+.Church {
+    --img-bg: url('../images/MainLocations/Church.jpg');
+}
+.City {
+    --img-bg: url('../images/MainLocations/City.jpg');
+}
+.SurfresBase {
+    --img-bg: url('../images/MainLocations/SurfresBase.jpg');
+}
+.VikingBoat {
+    --img-bg: url('../images/MainLocations/VikingBoat.jpg');
+}
+.Whale {
+    --img-bg: url('../images/MainLocations/Whale.jpg');
+}
+.WheatField {
+    --img-bg: url('../images/MainLocations/WheatField.jpg');
+}
+.Riot {
+    --img-bg: url('../images/MainLocations/Riot.jpg');
+}
+.Zeppelin {
+    --img-bg: url('../images/MainLocations/Zeppelin.jpg');
+}
+.RainbowBaloon {
+    --img-bg: url('../images/MainLocations/RainbowBaloon.jpg');
+}
+.Couple {
+    --img-bg: url('../images/MainLocations/Couple.jpg');
+}
+.Lifebuoy {
+    --img-bg: url('../images/MainLocations/Lifebuoy.jpg');
+}
+.Parachute {
+    --img-bg: url('../images/MainLocations/Parachute.jpg');
+}
+.Paulina {
+    --img-bg: url('../images/MainLocations/Paulina.jpg');
+}
+.Loose {
+    --img-bg: url('../images/MainLocations/Loose.jpg');
+} */
+
+.CommonBg {
+	@apply flex justify-center items-center min-h-[100vh];	
+	background-color: var(--header-bg);
+	background-image: var(--img-bg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top left;
+	color: var(--header-text);
+	}
