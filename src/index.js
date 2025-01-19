@@ -5,6 +5,8 @@ import store from "./Store";
 
 
 
+// Dilog system with memory via local storage 
+
 // Content box and dialog box added
 // Modal topbar
 // Full screen pictures concept returned, bg images added

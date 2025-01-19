@@ -38,7 +38,7 @@ const MainNavbarContent = (props) => {
                     <NavLink to="/about" className={({ isActive }) => (isActive ? `${styles.itemactive}` : `${styles.item}`)}>
                         About
                     </NavLink>
-                    <NavLink className="btn" onClick={props.clearKeys}>
+                    <NavLink className="btn-gradient-purpblue !h-12" onClick={props.clearKeys}>
                         Restart game
                     </NavLink>
                 </ul>

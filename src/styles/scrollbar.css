@@ -1,0 +1,32 @@
+.hide-scrollbar {
+    overflow-y: auto;
+	overflow-x: hidden;
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
+}
+
+/* Chrome, Edge and Safari */
+.custom-scrollbar::-webkit-scrollbar {	
+	height: 6px;
+	width: 7px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+	@apply  bg-purple-800 hover:bg-purple-700 active:hover:bg-purple-700
+	 rounded-md 
+}  
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	@apply bg-purple-500 hover:bg-purple-400 active:bg-purple-400 rounded-md hover:cursor-pointer
+}
+.custom-scrollbar::-webkit-scrollbar-corner {
+    @apply bg-transparent
+}
+
+/* Firefox   */
+.custom-scrollbar-firefox {	
+  scrollbar-width: thin;
+  scrollbar-color: #6520a5 #3b3b3b;
+}

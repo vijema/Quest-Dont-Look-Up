@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck";
 
 const MajorsHouse = (props) => {
-    const location = "MajorsHouse";
+    const location = "BayArea";
     const artifact = "MajorsHouseKey";
 
     return (

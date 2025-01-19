@@ -28,7 +28,7 @@ const GameMap = (props) => {
     
     return (
         <>
-            <button className="btn fixed bottom-5 right-5" onClick={() => setMapOpen(true)}>
+            <button className="btn-gradient-purpblue w-36 fixed bottom-5 left-5" onClick={() => setMapOpen(true)}>
                 Open map
             </button>
 

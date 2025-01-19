@@ -12,13 +12,13 @@ let store = {
                 link: "/start",
                 cover: images.locationCovers.Start,
             },
-            MajorsHouse: {
+            BayArea: {
                 title: "Major's House",
                 isAvailable: false,
                 isAttended: localStorage.getItem("MajorsHouse has visited") === "false",
                 isHidden: false,
                 coordinates: "top-[79%] left-[83%]",
-                cover: images.locationCovers.MajorsHouse,
+                cover: images.locationCovers.BayArea,
                 link: "/majors-house",
             },
             FarmersHouse: {
