@@ -5,6 +5,10 @@ import store from "./Store";
 
 
 
+
+// Switch case with location dot and button added to the end of the dialogs
+// Dilog system incapsulated and adapted for different dialogs
+
 // Dilog system with memory via local storage 
 
 // Content box and dialog box added

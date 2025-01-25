@@ -1,47 +1,9 @@
-import { NavLink } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
-import { scrollbar } from "../../styles/scrollbar.css";
+import Bubbles from "../components/Bubbles"
+
 
 const Start = (props) => { 
     const location = "Start";
-
-    const [step, setStep] = useState(0);
-    const [bubbles, setBubbles] = useState([]);
-    const messagesEndRef = useRef(null); 
-
-    // Загрузка сообщений из localStorage при монтировании
-    useEffect(() => {
-        const savedBubbles = localStorage.getItem('chatMessages');
-        if (savedBubbles) {
-            const parsedBubbles = JSON.parse(savedBubbles);
-            setBubbles(parsedBubbles);
-            setStep(parsedBubbles.length); // Устанавливаем шаг в соответствии с загруженными сообщениями
-        } else {
-            // Если нет сохраненных сообщений, добавляем первое сообщение
-            const initialBubble = <Bubble mesId={0} key={0} />;
-            setBubbles([initialBubble]);
-        }
-    }, []);
-
-    const onClickNext = (step) => {        
-        const newStep = step + 1;
-        setStep(newStep);      
-
-        // Создаем новый объект сообщения
-        const newBubble = <Bubble mesId={newStep} key={newStep} />;
-        setBubbles(prevBubbles => {
-            const updatedBubbles = [...prevBubbles, newBubble];
-            localStorage.setItem('chatMessages', JSON.stringify(updatedBubbles)); // Сохраняем в localStorage
-            return updatedBubbles;
-        });
-    };
-    
-
-      // Прокрутка вниз при обновлении массива сообщений
-      useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [bubbles]);
-    
+    const nextPage = props.state.locationsData.BayArea;  
     
     return (
         <main className="">
@@ -55,55 +17,19 @@ const Start = (props) => {
 
                 <div className="flex justify-start overflow-hidden overflow-y-auto custom-scrollbar w-[94%]">
                     <div className="dialog-container">
-                        
-                            
-                                {bubbles.map((bubble, index) => <Bubble key={index} mesId={index}/>)}
-
-                                {step < textdata.language.dialogs.length ? (
-                                <button className="btn-gradient-purpblue ml-2" onClick={() => onClickNext(step)}>
-                                    Next
-                                </button>
-                                  ) : (
-                                    <Button />
-                                )
-                            
-                      }
-                        <div ref={messagesEndRef} />
+                        <Bubbles textdata={textdata} 
+                                 location={location}  
+                                 btnText={"Visit " + nextPage.title}                      
+                                 flag={"dot"}
+                                 title={nextPage.title} 
+                                 link={nextPage.link}
+                                 coordinates={"!fixed top-[50%] left-[28.5%]"}
+                                 isVisited={nextPage.isAttended}                                                           
+                        />
                     </div>
                 </div>
             </div>
         </main>
-    );
-};
-
-const Button = () => {
-    return (
-        <NavLink className="btn-gradient-purpblue ml-2" to="/majors-house">
-            Visit Major's house
-        </NavLink>
-    );
-};
-
-const Bubble = (props) => {  
-    const dialog = textdata.language.dialogs[props.mesId];
-
-    // Проверяем, существует ли диалог
-    if (!dialog) {
-        return null; // Если диалог не существует, ничего не рендерим
-    }
-
-    return (
-        <>
-        <div className={textdata.language.dialogs[props.mesId].wrpd}>
-            <div className={`dialog-bubble-small ${textdata.language.dialogs[props.mesId].bgrd}`}></div>
-            <div className={`${textdata.language.dialogs[props.mesId].wrpb} ${textdata.language.dialogs[props.mesId].bgrd}`}>                            
-                <p><strong><span className={textdata.language.dialogs[props.mesId].colo}>{textdata.language.dialogs[props.mesId].char}</span></strong></p>
-                <p>{textdata.language.dialogs[props.mesId].text}</p>
-                <p>{textdata.language.dialogs[props.mesId].btn1}</p>             
-            </div>           
-        </div>
-         
-         </>
     );
 };
 
@@ -156,7 +82,7 @@ const textdata = {
                         },
                         {   char: "You",
                             colo: "text-green-700",
-                            text: "In the absence of the mayor? What do you mean? Where did the mayor go?",
+                            text: "Wait, what? In the absence of the mayor? What do you mean? Where did the mayor go?",
                             wrpd: "dialog-wrapper-right",
                             wrpb: "dialog-bubble-right",
                             bgrd: "!bg-lime-200/85",

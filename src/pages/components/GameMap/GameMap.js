@@ -7,6 +7,8 @@ const GameMap = (props) => {
     const [mapOpen, setMapOpen] = useState(false);
     const [locElements, setLocElements] = useState([]);
     
+        
+    useEffect(() => {
         const state = props.state;
         const locKeys = Object.keys(state.locationsData);
         const attendedLocKeys = locKeys.filter((key) => 
@@ -21,10 +23,8 @@ const GameMap = (props) => {
                 isVisited={state.locationsData[key].isAttended}
             />
         ));
-        
-    useEffect(() => {
         setLocElements(elements);
-    }, [elements]);
+    }, [props]);
     
     return (
         <>

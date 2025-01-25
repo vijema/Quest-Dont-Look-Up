@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import "./styles/main.css";
+import { scrollbar } from "./styles/scrollbar.css";
 import Welcome from "./pages/Welcome";
 import Start from "./pages/locations/Start";
 import MajorsHouse from "./pages/locations/MajorsHouse";
@@ -42,7 +43,7 @@ const MainLayout = (props) => {
             
             <Routes>
                 <Route exact path="/" element={<Welcome clearKeys={props.clearKeys} />} />
-                <Route path="/start" element={<Start state={props.state} />} />
+                <Route path="/start" element={<Start state={props.state} />} />                
                 <Route
                     path="/majors-house"
                     element={
