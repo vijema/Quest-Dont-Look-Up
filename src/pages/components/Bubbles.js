@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
-import LocationItemDots from "../components/GameMap/LocationItemDots"
+import LocationItemDots from "./GameMap/LocationItemDots"
+import GameMap from "./GameMap/GameMap";
 
 const Bubbles = (props) => {  
 
@@ -18,7 +19,7 @@ const Bubbles = (props) => {
             setStep(parsedBubbles.length); // Устанавливаем шаг в соответствии с загруженными сообщениями
         } else {
             // Если нет сохраненных сообщений, добавляем первое сообщение
-            const initialBubble = <Bubble mesId={0} key={0}/>;
+            const initialBubble = <Bubble key={0} mesId={0}/>;
             setBubbles([initialBubble]);
         }
     }, [props]);
@@ -28,7 +29,7 @@ const Bubbles = (props) => {
         setStep(newStep);      
 
         // Создаем новый объект сообщения
-        const newBubble = <Bubble mesId={newStep} key={newStep}/>;
+        const newBubble = <Bubble key={newStep} mesId={newStep}/>;
         setBubbles(prevBubbles => {
             const updatedBubbles = [...prevBubbles, newBubble];
             localStorage.setItem(props.location + ' Chat Messages', JSON.stringify(updatedBubbles)); // Сохраняем в localStorage
@@ -37,7 +38,7 @@ const Bubbles = (props) => {
     };
 
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth",  });
     }, [bubbles]);
     
     return (
@@ -52,13 +53,13 @@ const Bubbles = (props) => {
                 </button>
             ) : (
                 <AfterDialog 
+                    state={props.state}
                     btnText={props.btnText}
                     title={props.title} 
                     link={props.link} 
                     coordinates={props.coordinates}             
                     isVisited={props.isVisited}
-                    flag={props.flag}/>
-                // <Button nextPageLink={props.nextPageLink} nextPageName={props.nextPageName} />
+                    flag={props.flag}/>                
             )}
             <div ref={messagesEndRef} />
         </>
@@ -66,21 +67,83 @@ const Bubbles = (props) => {
 }
 
 
-const AfterDialog = (props) => { switch (props.flag) {
-    case "button":
-        return  <Button link={props.link} btnText={props.btnText} />;
-    case "dot":
-        return  <LocationItemDots 
-                upscale={"scale-[400%]"}
-                title={props.title} 
-                link={props.link} 
-                coordinates={props.coordinates}             
-                isVisited={props.isVisited} 
-                />;    
-    default:
-        return;
-    }    
+const AfterDialog = (props) => {
+    return (
+        <>
+            {props.flag.map((f) => {
+                switch (f) {
+                    case "button":
+                        return <Button key={f} link={props.link} btnText={props.btnText} />
+                    case "map":
+                        return <GameMap key={f} state={props.state} position="relative" upscale={"scale-[200%] hover:scale-[210%] mt-14 mb-20"}/>                                        
+                       
+                    case "dot":
+                        return (
+                            <LocationItemDots 
+                                key={f}
+                                upscale={"scale-[400%]"}
+                                title={props.title} 
+                                link={props.link} 
+                                coordinates={props.coordinates}             
+                                isVisited={props.isVisited}                                 
+                            />
+                        );
+                    default:
+                        return null;
+                }
+            })}
+        </>
+    );
 };
+
+
+
+const MapButton = () => {
+    const buttonRef = useRef(null);
+    
+
+    const moveButton = () => {
+        
+        const button = buttonRef.current;
+
+        // Целевые координаты
+        const targetPosition = { x: -1000, y: 0 }; // Измените на нужные координаты
+
+        // Устанавливаем начальные стили для анимации        
+        //button.style.position = 'relative';
+        button.style.transition = 'transform 0.5s ease-in-out';
+
+        // Перемещаем кнопку с помощью transform
+        button.style.transform = `translate(${targetPosition.x}px, ${targetPosition.y}px)`;
+    };
+
+    return (
+        <div style={{ position: 'relative' }}>
+            <button 
+                ref={buttonRef} 
+                className="btn-gradient-purpblue w-36" 
+                onClick={moveButton}
+            >
+                Open map
+            </button>
+        </div>
+    );
+};
+
+
+
+const MapButton2 = () => {
+    const [mapButtonStyles, setMapButtonStyles] = useState('');
+  
+    return (
+        <div className={`${mapButtonStyles}`}>
+        <button className="btn-gradient-purpblue w-36"
+         onClick={() => setMapButtonStyles('first-appearance-bounce fixed bottom-5 left-5 transition-all ease-in duration-200')}>
+                    Open map
+                </button>
+        </div>
+    )
+}
     
 
 const Button = (props) => {

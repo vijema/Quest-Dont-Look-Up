@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck";
 
 const MajorsHouse = (props) => {
-    const location = "BayArea";
-    const artifact = "MajorsHouseKey";
+    const location = "MajorsHouse";
+    //const artifact = "MajorsHouseKey";
 
     return (
         <main className="section">
@@ -17,12 +17,12 @@ const MajorsHouse = (props) => {
                     locationsAvailableAtNextVisitKeys={[]}
                     switchLocatonVisibility={props.switchLocatonVisibility}
                     switchLocatonVisibilityAtFirstVisitKeys={[]}
-                    switchLocatonVisibilityAtNextVisitKeys={["Start", "Lighthouse", "ChurchYard"]}
+                    switchLocatonVisibilityAtNextVisitKeys={["Lighthouse", "ChurchYard"]}
                     destroyLocation={props.destroyLocation}
                     locationstoDestroyAtFirstVisitKeys={[]}
                     locationstoDestroyAtNextVisitKeys={[]}
                     setArtifactCollectedTrue={props.setArtifactCollectedTrue}
-                    collectedArtifactKey={artifact}
+                    //collectedArtifactKey={artifact}
                     render={(isFirstVisit) => isFirstVisit 
                         ? <MajorsHouseFirstVisitComponent state={props.state} location={location} /> 
                         : <MajorsHouseNextVisitsComponent state={props.state} location={location} /> 

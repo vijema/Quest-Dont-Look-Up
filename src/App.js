@@ -4,6 +4,7 @@ import "./styles/main.css";
 import { scrollbar } from "./styles/scrollbar.css";
 import Welcome from "./pages/Welcome";
 import Start from "./pages/locations/Start";
+import BayArea from "./pages/locations/BayArea";
 import MajorsHouse from "./pages/locations/MajorsHouse";
 import FarmersHouse from "./pages/locations/FarmersHouse";
 import ChurchYard from "./pages/locations/ChurchYard";
@@ -42,8 +43,34 @@ const MainLayout = (props) => {
           
             
             <Routes>
-                <Route exact path="/" element={<Welcome clearKeys={props.clearKeys} />} />
-                <Route path="/start" element={<Start state={props.state} />} />                
+                <Route exact path="/" element={<Welcome clearKeys={props.clearKeys} />} />                  
+
+                <Route
+                    path="/start"
+                    element={
+                        <Start
+                            state={props.state}
+                            setLocationAttendedTrue={props.setLocationAttendedTrue}
+                            setLocationAvailableTrue={props.setLocationAvailableTrue}
+                            switchLocatonVisibility={props.switchLocatonVisibility}
+                            destroyLocation={props.destroyLocation}
+                            setArtifactCollectedTrue={props.setArtifactCollectedTrue}
+                        />
+                    }
+                />       
+                <Route
+                    path="/bay-area"
+                    element={
+                        <BayArea
+                            state={props.state}
+                            setLocationAttendedTrue={props.setLocationAttendedTrue}
+                            setLocationAvailableTrue={props.setLocationAvailableTrue}
+                            switchLocatonVisibility={props.switchLocatonVisibility}
+                            destroyLocation={props.destroyLocation}
+                            setArtifactCollectedTrue={props.setArtifactCollectedTrue}
+                        />
+                    }
+                />            
                 <Route
                     path="/majors-house"
                     element={

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from "./GameMap.module.css";
 import Map from "../../../img/Map.jpg";
+import BackgroundImage from '../../../img/Ticket.jpg';
 import LocationItemDots from "./LocationItemDots";
 
 const GameMap = (props) => {
@@ -25,12 +26,38 @@ const GameMap = (props) => {
         ));
         setLocElements(elements);
     }, [props]);
-    
+
+        
     return (
-        <>
-            <button className="btn-gradient-purpblue w-36 fixed bottom-5 left-5" onClick={() => setMapOpen(true)}>
-                Open map
-            </button>
+        <> 
+
+            <div
+            className={ 
+                    `bg-cover bg-center bg-no-repeat h-24 w-24 rounded-md 
+                     ${styles.minimap}                      
+                     ${props.upscale ? `${props.upscale}` : "hover:scale-[105%]"}
+                     ${props.position ? `${props.position}` : "fixed bottom-5 left-5 mt-5"}
+                    `
+                }
+                
+                style={{
+                    backgroundImage: `url(${BackgroundImage})`,
+                }}
+                
+                onClick={() => setMapOpen(true)} alt="minimap"
+                >
+                
+                </div>
+
+                {/* <img src={Minimap} 
+                 className={`${styles.minimap} ${props.position ? `${props.position}` : "fixed bottom-5 left-5 mt-5"}`}
+                onClick={() => setMapOpen(true)} alt="minimap"/> */}
+                   
+                
+                {/* <button className="btn-gradient-purpblue w-36 fixed bottom-5 left-5 mt-5" onClick={() => setMapOpen(true)}>
+                    Open map
+                </button> */}
+           
 
             <div //вернуть функцию закрытия по клику если нужно закрывать модалку при любом клике
              className={`${styles.overlay} ${styles.animated} ${mapOpen ? `${styles.show}` : ""}`}>

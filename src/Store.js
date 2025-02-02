@@ -6,20 +6,56 @@ let store = {
             Start: {
                 title: "Welcome to Cape Rabbits!", 
                 isAvailable: true,
-                isAttended: true,
+                isAttended: localStorage.getItem("Start has visited") === "true",
                 isHidden: false,
                 coordinates: "top-[94%] left-[83%]",
                 link: "/start",
                 cover: images.locationCovers.Start,
             },
             BayArea: {
+                title: "Bay Area",
+                isAvailable: false,
+                isAttended: localStorage.getItem("BayArea has visited") === "false",
+                isHidden: false,
+                coordinates: "top-[86%] left-[70%]",
+                cover: images.locationCovers.BayArea,
+                link: "/bay-area",
+            },
+            MajorsHouse: {
                 title: "Major's House",
                 isAvailable: false,
                 isAttended: localStorage.getItem("MajorsHouse has visited") === "false",
                 isHidden: false,
                 coordinates: "top-[79%] left-[83%]",
-                cover: images.locationCovers.BayArea,
+                cover: images.locationCovers.MajorsHouse,
                 link: "/majors-house",
+            },
+            Lighthouse: {
+                title: "Point Bunnita Lighthouse",                
+                isAvailable: false,
+                isAttended: false,
+                isHidden: false,
+                coordinates: "top-[91%] left-[61.36%]",
+                link: "/lighthouse",
+                cover: images.locationCovers.Lighthouse,
+
+                
+
+                LighthouseMainDoor: {
+                    title: "Lighthouse Main Door",
+                    link: "/",
+                    isAvailable: false,
+                    isAttended: true,
+                    isHidden: false,
+                },
+
+                LighthouseBackDoor: {
+                    title: "Lighthouse Back Door",
+                    link: "/",
+                    isAvailable: false,
+                    isAttended: false,
+                    isHidden: false,
+                },
             },
             FarmersHouse: {
                 title: "Farmer's House",                
@@ -57,31 +93,7 @@ let store = {
                 isHidden: false,
                 coordinates: "top-[46.5%] left-[19.5%]",
             },
-            Lighthouse: {
-                title: "Point Bunnita Lighthouse",                
-                isAvailable: false,
-                isAttended: false,
-                isHidden: false,
-                coordinates: "top-[91%] left-[61.36%]",
-                link: "/lighthouse",
-                cover: images.locationCovers.Lighthouse,
-
-                LighthouseMainDoor: {
-                    title: "Lighthouse Main Door",
-                    link: "/",
-                    isAvailable: false,
-                    isAttended: true,
-                    isHidden: false,
-                },
-
-                LighthouseBackDoor: {
-                    title: "Lighthouse Back Door",
-                    link: "/",
-                    isAvailable: false,
-                    isAttended: false,
-                    isHidden: false,
-                },
-            },
+            
             MajorsStatue: {
                 title: "Major's Statue",                
                 isAvailable: false,

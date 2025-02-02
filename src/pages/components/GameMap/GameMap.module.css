@@ -58,3 +58,7 @@
         }
     }
 }
+
+.minimap {
+    @apply cursor-pointer shadow-black shadow-[0_0_20px] transition-all ease-in-out duration-300 border-white border-4
+}

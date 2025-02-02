@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 
 const PrimaryLocationsVisitCheck = (props) => {
-
+  
   
   // Локальный стейт для отслеживания первого посещения
   const [islocationFirstVisit, setIslocationFirstVisit] = useState(true); 

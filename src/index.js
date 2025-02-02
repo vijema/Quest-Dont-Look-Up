@@ -6,6 +6,9 @@ import store from "./Store";
 
 
 
+// Move back to boat prevented
+// Map button in bubbles customized
+
 // Switch case with location dot and button added to the end of the dialogs
 // Dilog system incapsulated and adapted for different dialogs
 
@@ -15,21 +18,7 @@ import store from "./Store";
 // Modal topbar
 // Full screen pictures concept returned, bg images added
 
-// Scrollbar hidden
-// Location dots state info update bug fixed
 
-// switchLocatonVisibility func added
-// Visited locations style assigning logic symplified
-// clearKeys func simplyfied
-
-// Locations components more universal, Images import incapsulated
-// Logo added, Main sidebar crated, Welcome page cleaned
-// Game map and navbar connected via props
-// Visited locations option added
-// Additional available locations and destroy location logic added
-// Location first visit check incapsulated in a separate reusable component
-// Only single one universal isLocationAttendedTrueFunc(locationKey) is now being used to update all the locations statuses
-// The universal component is now being used for all locations
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
