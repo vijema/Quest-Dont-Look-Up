@@ -1,20 +1,18 @@
 import { NavLink } from "react-router-dom";
 import Bubbles from "../components/Bubbles"
+import LocationItemDots from "../components/GameMap/LocationItemDots";
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck";
-import {BayAreaNextVisitsComponent} from "./BayArea"
 
-
-const Start = (props) => {     
-    const location = "Start";
-    const nextPage = "BayArea";  
-    
-    return (
+const Start = (props) => {  
+    const currentLocation = "Start";
+    const nextAvailableLocs = ["BayArea"];    
+    return ( 
                 <PrimaryLocationsVisitCheck
                     state={props.state}
                     setLocationAttendedTrue={props.setLocationAttendedTrue}
-                    attendedLocationKey={location}
+                    attendedLocationKey={currentLocation}
                     setLocationAvailableTrue={props.setLocationAvailableTrue}
-                    locationsAvailableAtFirstVisitKeys={[nextPage]}
+                    locationsAvailableAtFirstVisitKeys={nextAvailableLocs}
                     locationsAvailableAtNextVisitKeys={[]}
                     switchLocatonVisibility={props.switchLocatonVisibility}
                     switchLocatonVisibilityAtFirstVisitKeys={[]}
@@ -25,23 +23,21 @@ const Start = (props) => {
                     setArtifactCollectedTrue={props.setArtifactCollectedTrue}
                     //collectedArtifactKey={artifact}
                     render={(isFirstVisit) => isFirstVisit 
-                        ? <StartFirstVisitComponent state={props.state} location={location} nextPage={nextPage} /> 
-                        : <StartNextVisitsComponent state={props.state} location={location} nextPage={nextPage}/> 
+                        ? <StartFirstVisitComponent state={props.state} currentLocation={currentLocation} nextAvailableLocs={nextAvailableLocs}/> 
+                        : <StartNextVisitsComponent state={props.state} currentLocation={currentLocation} nextAvailableLocs={nextAvailableLocs}/> 
                     }
                 />
     );
 };
 
-
-const StartFirstVisitComponent = (props) => {    
+const StartFirstVisitComponent = (props) => {  
     
-    const nextPage = props.state.locationsData[props.nextPage];  
     return (
-        <main className="">
-            <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
+        <main>
+            <img src={props.state.locationsData[props.currentLocation].cover} className="project-details__cover" alt="cover" />
 
             <div className="project-details__content w-[460px] h-[85vh] top-[10%] right-[2%]">
-                <div className="title-3">{props.state.locationsData[props.location].title}</div>
+                <div className="title-3">{props.state.locationsData[props.currentLocation].title}</div>
                 <div className="project-details__text">
                     <p>{textdata.language.agenda}</p>
                 </div>
@@ -50,13 +46,11 @@ const StartFirstVisitComponent = (props) => {
                     <div className="dialog-container">
                         <Bubbles state={props.state}
                                  textdata={textdata} 
-                                 location={[props.location]}  
-                                 btnText={"Visit " + nextPage.title}                      
-                                 flag={["dot", "map"]}
-                                 title={nextPage.title} 
-                                 link={nextPage.link}
-                                 coordinates={"!fixed top-[50%] left-[28.5%]"}
-                                 isVisited={nextPage.isAttended}                                                           
+                                 location={props.currentLocation} 
+                                 title={props.state.locationsData[props.currentLocation].title + " (You are here)"}
+                                 coordinates={"!fixed top-[36%] left-[60%]"}                                
+                                 nextAvailableLocs={<NextAvailableLocs state={props.state} currentLocation={props.currentLocation} nextAvailableLocs={props.nextAvailableLocs}/>}
+                                 flag={["map", "dot"]}                                 
                         />
                     </div>
                 </div>
@@ -65,33 +59,45 @@ const StartFirstVisitComponent = (props) => {
     );
 };
 
-const StartNextVisitsComponent = (props) => {
-    //return <BayAreaNextVisitsComponent state={props.state} location={"BayArea"} prevLocation={"Start"} />;
-    const nextPage = props.state.locationsData[props.nextPage];  
+const NextAvailableLocs = (props) => { 
+
+    return (
+        <>
+            <LocationItemDots
+                title={props.state.locationsData[props.currentLocation].title + " (You are here)"}
+                upscale={"scale-[400%]"}
+                coordinates={"!fixed top-[87%] left-[44%]"}
+                isVisited={props.state.locationsData[props.currentLocation].isAttended}
+            />
+            <LocationItemDots
+                title={props.state.locationsData[props.nextAvailableLocs[0]].title}
+                link={props.state.locationsData[props.nextAvailableLocs[0]].link}
+                upscale={"scale-[400%]"}
+                coordinates={"!fixed top-[42%] left-[34%]"}
+                isVisited={props.state.locationsData[props.nextAvailableLocs[0]].isAttended}
+            />
+        </>
+    );
+}
+
+
+const StartNextVisitsComponent = (props) => {  
+    
     return (
         <main className="">
-            <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
+            <img src={props.state.locationsData[props.currentLocation].coverVisited} className="project-details__cover" alt="cover" />
 
-            <div className="project-details__content w-[460px] h-[85vh] top-[10%] right-[2%]">
-                <div className="title-3">{props.state.locationsData[props.location].title}</div>
+            <div className="project-details__content w-[460px] h-[265px] top-[10%] right-[2%]">
+                <div className="title-3">{props.state.locationsData[props.currentLocation].titleAlt}</div>
                 <div className="project-details__text">
-                    <p>{textdata.language.agenda}</p>
+                        <p>{textdata.language.agendaVisited}</p>
                 </div>
+                <NavLink className="btn-gradient-purpblue ml-2" to="/bay-area">
+                        Got it. Back to Bay Area
+                </NavLink>
 
-                <div className="flex justify-start overflow-hidden overflow-y-auto custom-scrollbar w-[94%]">
-                    <div className="dialog-container">
-                        <Bubbles state={props.state}
-                                 textdata={textdata} 
-                                 location={[props.location]}  
-                                 btnText={"Visit " + nextPage.title}                      
-                                 flag={["dot", "map"]}
-                                 title={nextPage.title} 
-                                 link={nextPage.link}
-                                 coordinates={"!fixed top-[50%] left-[28.5%]"}
-                                 isVisited={nextPage.isAttended}                                                           
-                        />
-                    </div>
-                </div>
+                <NextAvailableLocs state={props.state} currentLocation={props.currentLocation} nextAvailableLocs={props.nextAvailableLocs}/> 
+
             </div>
         </main>
     );
@@ -101,6 +107,7 @@ const textdata = {
       language: 
                 {
                 agenda: "You are heading to Cape Rabbits at the invitation of your old comrade in arms, the founder and mayor of this wonderful town - the retired commander of the elite rabbit SEALs Major Rabbits, nicknamed in this town the Holy Major. During the journey you meet a talkative captain and strike up a conversation with him.",
+                agendaVisited: "Unfortunately, the Captain is currently on a voyage and you won't be able to talk to him.",
                 dialogs: [
                         {   char: "Captain",
                             colo: "text-blue-700",

@@ -1,5 +1,5 @@
 .mapdot {
-    @apply w-6 h-6 bg-white rounded-full border-4 border-emerald-500 animate-bounce shadow-black shadow-[0_0_10px]       
+    @apply w-6 h-6 flex justify-center items-center bg-white rounded-full border-4 border-emerald-500 animate-bounce shadow-black shadow-[0_0_10px];         
 }
 
 .mapdotactive {
@@ -11,5 +11,6 @@
 }
 
 .tooltip {
-    @apply text-center text-sm text-white leading-tight px-2 py-0.5 rounded-sm bg-black/70 cursor-default absolute -bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2
+    @apply text-center text-sm text-white leading-tight px-2 py-0.5 rounded-sm bg-black/70 cursor-default 
+    w-max absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }

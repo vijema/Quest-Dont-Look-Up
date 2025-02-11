@@ -1,76 +1,101 @@
 import { NavLink } from "react-router-dom";
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck";
+import LocationItemDots from "../components/GameMap/LocationItemDots";
+import Bubbles from "../components/Bubbles";
+import Redirect from "../utils/Redirect";
+import Exit from "../components/Exit";
 
-const MajorsHouse = (props) => {
-    const location = "MajorsHouse";
-    //const artifact = "MajorsHouseKey";
+const MajorsHouse = (props) => { 
+    const currentLocation = "MajorsHouse";
+    const nextAvailableLocs = ["MajorsHouseBedroom", "MajorsHouseAttic"];  
+    const artifact = "MajorsLetter";
 
     return (
-        <main className="section">
-            <div className="container">
+        <main className="">
+            
                 <PrimaryLocationsVisitCheck
                     state={props.state}
                     setLocationAttendedTrue={props.setLocationAttendedTrue}
-                    attendedLocationKey={location}
+                    attendedLocationKey={currentLocation}
                     setLocationAvailableTrue={props.setLocationAvailableTrue}
-                    locationsAvailableAtFirstVisitKeys={["FarmersHouse"]}
-                    locationsAvailableAtNextVisitKeys={[]}
+                    locationsAvailableAtFirstVisitKeys={[]}
+                    locationsAvailableAtNextVisitKeys={nextAvailableLocs}
                     switchLocatonVisibility={props.switchLocatonVisibility}
                     switchLocatonVisibilityAtFirstVisitKeys={[]}
-                    switchLocatonVisibilityAtNextVisitKeys={["Lighthouse", "ChurchYard"]}
+                    switchLocatonVisibilityAtNextVisitKeys={[]}
                     destroyLocation={props.destroyLocation}
                     locationstoDestroyAtFirstVisitKeys={[]}
                     locationstoDestroyAtNextVisitKeys={[]}
                     setArtifactCollectedTrue={props.setArtifactCollectedTrue}
-                    //collectedArtifactKey={artifact}
+                    collectedArtifactKey={artifact}
                     render={(isFirstVisit) => isFirstVisit 
-                        ? <MajorsHouseFirstVisitComponent state={props.state} location={location} /> 
-                        : <MajorsHouseNextVisitsComponent state={props.state} location={location} /> 
+                        ? <Redirect targetUrl={"/bay-area"} />
+                        : <MajorsHouseNextVisitsComponent state={props.state} currentLocation={currentLocation} nextAvailableLocs={nextAvailableLocs}/> 
                     }
                 />
-            </div>
+            
         </main>
     );
 };
 
 const MajorsHouseFirstVisitComponent = (props) => {
     return (
-        <div className="project-details-col">
-            
-            <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
-            <div className="project-details__content">
-            <div className="title-3">{props.state.locationsData[props.location].title}</div>
-            <div className="project-details__text">
-                <p>
-                    The Mayor's house is located right on the coast. As expected, no one answers when you knock. You are noticed by the Mayor's
-                    neighbors - local gardeners. They say that they were warned about your visit and confirm the captain's words - there has been no
-                    news about the fate of Major Rabbits for a couple of months. The last person to see him was a local shopkeeper, but he says that
-                    he allegedly saw the Mayor flying away from a local airfield in a hot air balloon with some lady. The police came several times
-                    inspected the house but still can't find any leads. At the request of the owner, the neighbors give you the keys, so the Mayor's
-                    house is at your complete disposal.
-                </p>
-            </div>
-            </div>
-        </div>
+        <Redirect targetUrl={"/bay-area"} />
     );
 };
 
 const MajorsHouseNextVisitsComponent = (props) => {
+
+    if (props.state.collectedArtifacts.MajorsHouseKey.isCollected === true) {
     return (
-        <div className="project-details-col">
+        <main className="">            
+            <img src={props.state.locationsData[props.currentLocation].cover} className="project-details__cover" alt="cover" />
             
-            <img src={props.state.locationsData[props.location].cover} className="project-details__cover" alt="cover" />
-            <div className="project-details__content">
-            <div className="title-3">{props.state.locationsData[props.location].title}</div>
-            <div className="project-details__text">
-                <span style={{ color: "aqua" }}>Вы ранее уже посещали дом мэра.</span>
+            <div className="project-details__content w-[460px] h-[250px] top-[10%] left-5">
+                <div className="title-3">{props.state.locationsData[props.currentLocation].title}</div>
+                <div className="project-details__text">
+                    <p>{textdata.language.agenda}</p>
+                    {/* <span style={{ color: "aqua" }}>{textdata.language.agenda}</span> */}
+                </div>
+                               
+                <LocationItemDots                        
+                        title={props.state.locationsData[props.nextAvailableLocs[0]].title}
+                        link={props.state.locationsData[props.nextAvailableLocs[0]].link}
+                        upscale={"scale-[400%]"} 
+                        coordinates={"!fixed top-[71%] left-[30.5%]"} 
+                        isVisited={props.state.locationsData[props.nextAvailableLocs[0]].isAttended}                               
+                />
+                <LocationItemDots                        
+                        title={props.state.locationsData[props.nextAvailableLocs[1]].title}
+                        link={props.state.locationsData[props.nextAvailableLocs[1]].link}
+                        upscale={"scale-[400%]"} 
+                        coordinates={"!fixed top-[31%] left-[68%]"} 
+                        isVisited={props.state.locationsData[props.nextAvailableLocs[1]].isAttended}                               
+                />
+                <Exit link={"/bay-area"} />
             </div>
-            <NavLink className="btn" to="/farmers-house">
-                Visit Farmer's house
-            </NavLink>
-        </div>
-        </div>
-    );
+        </main>
+    );} else {
+        return <Redirect targetUrl={"/bay-area"} />
+
     };
+};
+
+
+const textdata = {
+    language: 
+              {
+              agenda: "You decide to start searching without wasting time, look around the house. You don't find anything suspicious in the living room.",
+              dialogs: [
+                      {   char: "Gardener",
+                          colo: "text-blue-700",
+                          text: "Hey, buddy! You must be a Major's friend he had been talking about so many times?!",
+                          wrpd: "dialog-wrapper-left",
+                          wrpb: "dialog-bubble-left",
+                          bgrd: "",                            
+                      }    
+                  ],
+               },
+};
 
 export default MajorsHouse;

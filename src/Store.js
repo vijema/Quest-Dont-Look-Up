@@ -3,37 +3,63 @@ import { images } from "./ImageState";
 let store = {
     _state: {
         locationsData: {
-            Start: {
+            Start: { 
                 title: "Welcome to Cape Rabbits!", 
+                titleAlt: "Eared pier",
                 isAvailable: true,
-                isAttended: localStorage.getItem("Start has visited") === "true",
+                isAttended: localStorage.getItem("Start has visited") === "true" ? true : false,
                 isHidden: false,
-                coordinates: "top-[94%] left-[83%]",
-                link: "/start",
+                coordinates: "top-[94%] left-[83%]",                
                 cover: images.locationCovers.Start,
+                coverVisited: images.locationCovers.Start2,
+                link: "/start",
             },
             BayArea: {
-                title: "Bay Area",
+                title: "Bay Area",                
                 isAvailable: false,
-                isAttended: localStorage.getItem("BayArea has visited") === "false",
+                isAttended: localStorage.getItem("BayArea has visited") === "true" ? true : false,
                 isHidden: false,
                 coordinates: "top-[86%] left-[70%]",
                 cover: images.locationCovers.BayArea,
+                coverVisited: images.locationCovers.BayArea2,
+                coverReVisited: images.locationCovers.BayArea3,
                 link: "/bay-area",
             },
+
             MajorsHouse: {
                 title: "Major's House",
                 isAvailable: false,
-                isAttended: localStorage.getItem("MajorsHouse has visited") === "false",
+                isAttended: localStorage.getItem("MajorsHouse has visited") === "true" ? true : false,
                 isHidden: false,
                 coordinates: "top-[79%] left-[83%]",
                 cover: images.locationCovers.MajorsHouse,
-                link: "/majors-house",
+                link: "/majors-house",                
             },
+            MajorsHouseAttic: {
+                title: "Attic",
+                isAvailable: false,
+                isAttended: localStorage.getItem("MajorsHouseAttic has visited") === "true" ? true : false,
+                isHidden: false,
+                //coordinates: "top-[79%] left-[83%]",
+                cover: images.locationCovers.MajorsHouse,
+                link: "/majors-house-attic",
+                isSubloc: true
+            },
+            MajorsHouseBedroom: {
+                title: "Bedroom",
+                isAvailable: false,
+                isAttended: localStorage.getItem("MajorsHouseAttic has visited") === "true" ? true : false,
+                isHidden: false,
+                //coordinates: "top-[79%] left-[83%]",
+                cover: images.locationCovers.MajorsHouse,
+                link: "/majors-house-bedroom",
+                isSubloc: true
+            },
+
             Lighthouse: {
                 title: "Point Bunnita Lighthouse",                
                 isAvailable: false,
-                isAttended: false,
+                isAttended: localStorage.getItem("Lighthouse has visited") === "true" ? true : false,
                 isHidden: false,
                 coordinates: "top-[91%] left-[61.36%]",
                 link: "/lighthouse",
@@ -57,10 +83,11 @@ let store = {
                     isHidden: false,
                 },
             },
+
             FarmersHouse: {
                 title: "Farmer's House",                
                 isAvailable: false,
-                isAttended: localStorage.getItem("FarmersHouse has visited") === "false",
+                isAttended: localStorage.getItem("FarmersHouse has visited") === "true" ? true : false,
                 isHidden: false,
                 coordinates: "top-[67%] left-[14.5%]",
                 link: "/farmers-house",
@@ -124,7 +151,7 @@ let store = {
             MajorsHouseKey: {
                 title: "The key from the Major's house",
                 image: images.itemImages.FarmerHouseKey,
-                isCollected: false,
+                isCollected: localStorage.getItem("MajorsHouseKey collected") === "true" ? true : false,
             },
             MajorLetter: {
                 title: "Letter from Major",
@@ -161,6 +188,7 @@ let store = {
 
     setLocationAttendedTrue(locationKey) {
         this._state.locationsData[locationKey].isAttended = true;
+        localStorage.setItem(locationKey + ' has visited', 'true');
     },
 
     setLocationAvailableTrue(locationKeys) {
@@ -194,7 +222,9 @@ let store = {
     },
 
     setArtifactCollectedTrue(artifactKey) {
-        this._state.locationsData[artifactKey].isCollected = true;
+        this._state.collectedArtifacts[artifactKey].isCollected = true;
+        localStorage.setItem(artifactKey + ' collected', 'true');
+        console.log("Calback for " + artifactKey + "works!")
     },
 
     clearKeys() {
@@ -212,7 +242,7 @@ let store = {
         //     }
         // };
         // clearStatus(this._state.locationsData, this._state.collectedArtifacts);
-        window.location.href = "/?rabbit-#" + new Date().getTime() + "-was-just-born!";
+        window.location.href = "/?rabbit-#" + new Date().getTime() + "-was-just-born!";        
     },
 
     dispatch(action) {},

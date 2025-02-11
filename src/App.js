@@ -127,7 +127,10 @@ const MainLayout = (props) => {
                 {/* <Route path="*" element={<NotFound />} />       */}
             </Routes>
        
-            {location.pathname !== "/" && location.pathname !== "/start" && <GameMap state={props.state}/>}
+            {location.pathname !== "/" && 
+             location.pathname !== "/start" && 
+             location.pathname !== "/majors-house" && 
+             <GameMap state={props.state}/>}
         </div>
     );
 };

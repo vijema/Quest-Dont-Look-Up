@@ -1,5 +1,10 @@
 import Start from './images/MainLocations/Start.jpg';
+import Start2 from './images/MainLocations/Start2.jpg';
 import BayArea from './images/MainLocations/BayArea.jpg';
+import BayArea2 from './images/MainLocations/BayArea2.jpg';
+import BayArea3 from './images/MainLocations/BayArea3.jpg';
+import MajorsHouse from './images/MajorsHouse/MajorsHouse.jpg';
+import MajorsHouseAttic from './images/MajorsHouse/MajorsHouseAttic2.jpg';
 import MajorStatue from './images/MainLocations/MajorStatue.jpg';
 import FarmersHouse from './images/MainLocations/FarmersHouse.jpg';
 import Beacon from './images/MainLocations/Beacon.jpg';
@@ -41,8 +46,13 @@ import ChurchKey from './images/artifacts/KeyChurch.jpg'
 const images = {
     locationCovers: {
         Start: Start,
+        Start2: Start2,
         BayArea: BayArea,
+        BayArea2: BayArea2,
+        BayArea3: BayArea3,
         MajorStatue: MajorStatue,
+        MajorsHouse: MajorsHouse,
+        MajorsHouseAttic: MajorsHouseAttic,
         FarmersHouse: FarmersHouse,
         Beacon: Beacon,
         Church: Church,

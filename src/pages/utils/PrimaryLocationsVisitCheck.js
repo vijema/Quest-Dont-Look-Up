@@ -1,36 +1,38 @@
 import { useState, useEffect } from 'react';
 
-
-const PrimaryLocationsVisitCheck = (props) => {
+const PrimaryLocationsVisitCheck = (props) => {     
   
-  
-  // Локальный стейт для отслеживания первого посещения
-  const [islocationFirstVisit, setIslocationFirstVisit] = useState(true); 
+  const [islocationVisited, setIslocationVisited] = useState(props.state.locationsData[props.attendedLocationKey].isAttended); 
+  const [isLoading, setIsLoading] = useState(true);
 
   // Эффект для изменения состояния при первом посещении - на основе изменения стейта
-  useEffect(() => {  
-    const attendedLocationKey = props.attendedLocationKey;
-    const locationHasVisited = props.state.locationsData[attendedLocationKey].isAttended;      
+  useEffect(() => {           
 
-    if (!locationHasVisited) { 
-      localStorage.setItem(attendedLocationKey + ' has visited', 'true');
-      props.setLocationAttendedTrue(attendedLocationKey)
-
+    if (!islocationVisited) { // Первое посещение локации      
+      props.setLocationAttendedTrue(props.attendedLocationKey)        
       props.setLocationAvailableTrue(props.locationsAvailableAtFirstVisitKeys)
       props.switchLocatonVisibility(props.switchLocatonVisibilityAtFirstVisitKeys)
-      props.destroyLocation(props.locationstoDestroyAtFirstVisitKeys)        
-    } else { 
+      props.destroyLocation(props.locationstoDestroyAtFirstVisitKeys)              
+    } else { // Следующее посещение локации       
       props.setLocationAvailableTrue(props.locationsAvailableAtNextVisitKeys)
       props.switchLocatonVisibility(props.switchLocatonVisibilityAtNextVisitKeys)
-      props.destroyLocation(props.locationstoDestroyAtNextVisitKeys)   
-      setIslocationFirstVisit(false); // Если пользователь уже посещал страницу, обновляем состояние    
+      props.destroyLocation(props.locationstoDestroyAtNextVisitKeys)    
+      setIslocationVisited(true);        
       }
-  }, [props]);
 
-  return props.render(islocationFirstVisit);
+      setIsLoading(false);
+
+      return () => {
+        }
+      
+  }, [props, islocationVisited]);
+
+  if (isLoading) {
+    return null;
+  }
+
+  return props.render(!islocationVisited);
 };
-
-
 
 export default PrimaryLocationsVisitCheck;
           

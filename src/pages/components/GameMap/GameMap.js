@@ -13,7 +13,7 @@ const GameMap = (props) => {
         const state = props.state;
         const locKeys = Object.keys(state.locationsData);
         const attendedLocKeys = locKeys.filter((key) => 
-            (state.locationsData[key].isAttended || state.locationsData[key].isAvailable) && !state.locationsData[key].isHidden
+            (state.locationsData[key].isAttended || state.locationsData[key].isAvailable) && !state.locationsData[key].isHidden && !state.locationsData[key].isSubloc
         );
         const elements = attendedLocKeys.map((key) => (
             <LocationItemDots

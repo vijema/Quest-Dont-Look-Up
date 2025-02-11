@@ -41,6 +41,7 @@ const Bubbles = (props) => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth",  });
     }, [bubbles]);
     
+    
     return (
         <>
             {bubbles.map((bubble, step) => (
@@ -53,13 +54,19 @@ const Bubbles = (props) => {
                 </button>
             ) : (
                 <AfterDialog 
+                    key={step}
                     state={props.state}
+                    nextAvailableLocs={props.nextAvailableLocs}
+                    //title={props.title} 
                     btnText={props.btnText}
-                    title={props.title} 
-                    link={props.link} 
-                    coordinates={props.coordinates}             
-                    isVisited={props.isVisited}
-                    flag={props.flag}/>                
+                    btnLink={props.btnLink} 
+                    //coordinates={props.coordinates}             
+                    //isVisited={props.isVisited}
+                    flag={props.flag}
+                    collectedArtifactKey={props.collectedArtifactKey}
+                    callbackFunk={props.callbackFunk} 
+                    />  
+                                  
             )}
             <div ref={messagesEndRef} />
         </>
@@ -78,17 +85,27 @@ const AfterDialog = (props) => {
                         return <GameMap key={f} state={props.state} position="relative" upscale={"scale-[200%] hover:scale-[210%] mt-14 mb-20"}/>                                        
                        
                     case "dot":
+                        return props.nextAvailableLocs
+
+                            // <LocationItemDots 
+                            //     key={f}
+                            //     title={props.title} 
+                            //     link={props.link} 
+                            //     coordinates={props.coordinates}  
+                            //     upscale={"scale-[400%]"}           
+                            //     isVisited={props.isVisited}                                 
+                            // />
+                    case "artifact":
                         return (
-                            <LocationItemDots 
+                            <ButtonCallback
                                 key={f}
-                                upscale={"scale-[400%]"}
-                                title={props.title} 
-                                link={props.link} 
-                                coordinates={props.coordinates}             
-                                isVisited={props.isVisited}                                 
+                                collectedArtifactKey={props.collectedArtifactKey}
+                                callbackFunk={props.callbackFunk}
+                                btnText={"Take the key"}
                             />
-                        );
-                    default:
+                        );    
+                    
+                        default:
                         return null;
                 }
             })}
@@ -97,72 +114,26 @@ const AfterDialog = (props) => {
 };
 
 
-
-const MapButton = () => {
-    const buttonRef = useRef(null);
-    
-
-    const moveButton = () => {
-        
-        const button = buttonRef.current;
-
-        // Целевые координаты
-        const targetPosition = { x: -1000, y: 0 }; // Измените на нужные координаты
-
-        // Устанавливаем начальные стили для анимации        
-        //button.style.position = 'relative';
-        button.style.transition = 'transform 0.5s ease-in-out';
-
-        // Перемещаем кнопку с помощью transform
-        button.style.transform = `translate(${targetPosition.x}px, ${targetPosition.y}px)`;
-    };
-
-    return (
-        <div style={{ position: 'relative' }}>
-            <button 
-                ref={buttonRef} 
-                className="btn-gradient-purpblue w-36" 
-                onClick={moveButton}
-            >
-                Open map
-            </button>
-        </div>
-    );
-};
-
-
-
-const MapButton2 = () => {
-    const [mapButtonStyles, setMapButtonStyles] = useState('');
-  
-    return (
-        <div className={`${mapButtonStyles}`}>
-        <button className="btn-gradient-purpblue w-36"
-         onClick={() => setMapButtonStyles('first-appearance-bounce fixed bottom-5 left-5 transition-all ease-in duration-200')}>
-                    Open map
-                </button>
-        </div>
-    )
-}
-    
-
 const Button = (props) => {
     return (
-        <NavLink className="btn-gradient-purpblue ml-2" to={props.link}>
+        <NavLink className="btn-gradient-purpblue ml-2" to={props.btnLink}>
             {props.btnText}
         </NavLink>
     );
 };
 
+const ButtonCallback = (props) => {
+    return (
+        <div onClick={() => props.callbackFunk(props.collectedArtifactKey)} className="btn-gradient-purpblue ml-2">
+            {props.btnText}
+        </div>
+    );
+};
+
 
 const Bubble = (props) => { 
-    const dialog = props.textdata.language.dialogs[props.mesId];
-
-    // Проверяем, существует ли диалог
-    if (!dialog) {
-        return null; // Если диалог не существует, ничего не рендерим
-    }
-
+    const dialog = props.textdata.language.dialogs[props.mesId];    
+    if (!dialog) {return null;} // Проверяем, существует ли диалог
     return (
         <>
         <div className={props.textdata.language.dialogs[props.mesId].wrpd}>

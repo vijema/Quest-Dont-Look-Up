@@ -12,12 +12,17 @@ const LocationItemDots = (props) => {
     return (
         <>      
             <div className={`flex flex-col items-center absolute ${props.coordinates}  ${props.upscale}`}>
-                <div className='relative'>{showTooltip && <p className={styles.tooltip}>{props.title}</p>}</div>              
+                <div className='relative'>
+                    {showTooltip && <p className={`${styles.tooltip} ${props.upscale ? "scale-50 !-bottom-2" : ""}`}>{props.title}</p>}
+                </div>              
                 <NavLink to={props.link} className={({ isActive }) => 
                     isActive ? `${styles.mapdotactive}` : props.isVisited ? `${styles.mapdotvisited}` : `${styles.mapdot}`}                          
                          onMouseEnter={() => setShowTooltip(true)} 
-                         onMouseLeave={() => setShowTooltip(false)}>
-                 </NavLink> 
+                         onMouseLeave={() => setShowTooltip(false)}
+                >
+                    <div className="scale-95">🐰</div>
+                </NavLink>
+                
             </div>
         </>
     );
