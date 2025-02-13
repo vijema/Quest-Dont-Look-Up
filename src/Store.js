@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 import { images } from "./ImageState";
+
 
 let store = {
     _state: {
@@ -6,9 +9,9 @@ let store = {
             Start: { 
                 title: "Welcome to Cape Rabbits!", 
                 titleAlt: "Eared pier",
-                isAvailable: true,
+                isAvailable: localStorage.getItem("Start is now available") === "true" ? true : false,
                 isAttended: localStorage.getItem("Start has visited") === "true" ? true : false,
-                isHidden: false,
+                isHidden: localStorage.getItem("Start visibility changed") === "true" ? true : false,
                 coordinates: "top-[94%] left-[83%]",                
                 cover: images.locationCovers.Start,
                 coverVisited: images.locationCovers.Start2,
@@ -16,9 +19,9 @@ let store = {
             },
             BayArea: {
                 title: "Bay Area",                
-                isAvailable: false,
+                isAvailable: localStorage.getItem("BayArea is now available") === "true" ? true : false,
                 isAttended: localStorage.getItem("BayArea has visited") === "true" ? true : false,
-                isHidden: false,
+                isHidden: localStorage.getItem("BayArea visibility changed") === "true" ? true : false,
                 coordinates: "top-[86%] left-[70%]",
                 cover: images.locationCovers.BayArea,
                 coverVisited: images.locationCovers.BayArea2,
@@ -150,8 +153,8 @@ let store = {
         collectedArtifacts: {
             MajorsHouseKey: {
                 title: "The key from the Major's house",
-                image: images.itemImages.FarmerHouseKey,
-                isCollected: localStorage.getItem("MajorsHouseKey collected") === "true" ? true : false,
+                image: images.itemImages.MajorsHouseKey,
+                isCollected: localStorage.getItem("MajorsHouseKey artifact collected") === "true" ? true : false,                
             },
             MajorLetter: {
                 title: "Letter from Major",
@@ -179,7 +182,13 @@ let store = {
                 isCollected: false,
             },
         },
-    },
+
+        serviceConditions: {
+            isToldToGardener: localStorage.getItem("isToldToGardener condition trigged") === "true" ? true : false,
+            isToldToFarmer: localStorage.getItem("isToldToFarmer condition trigged") === "true" ? true : false,
+        }
+    },   
+   
     
 
     getState() {
@@ -196,9 +205,18 @@ let store = {
             console.warn("locationKeys to set available is not an array or is empty:", locationKeys);
             return;
         }
-        for (var i = 0; i < locationKeys.length; i++) this._state.locationsData[locationKeys[i]].isAvailable = true;
-    },
+        //for (var i = 0; i < locationKeys.length; i++) this._state.locationsData[locationKeys[i]].isAvailable = true;
 
+        locationKeys.forEach(key => {            
+            if (this._state.locationsData[key]) {                
+                this._state.locationsData[key].isAvailable = true;
+                localStorage.setItem(key + ' is now available', 'true');
+            } else {
+                console.warn(`Key ${key} does not exist in locationsData.`);
+            }
+        });
+    },
+    
     switchLocatonVisibility(locationKeys) {
         
         if (!Array.isArray(locationKeys) || locationKeys.length === 0) {
@@ -211,6 +229,7 @@ let store = {
             if (this._state.locationsData[key]) {
                 // Меняем значение isHidden на противоположное
                 this._state.locationsData[key].isHidden = !this._state.locationsData[key].isHidden;
+                localStorage.setItem(key + ' visibility changed', this._state.locationsData[key].isHidden);
             } else {
                 console.warn(`Key ${key} does not exist in locationsData.`);
             }
@@ -221,30 +240,70 @@ let store = {
         for (var i = 0; i < locationKeys.length; i++) delete this._state.locationsData[locationKeys[i]];
     },
 
-    setArtifactCollectedTrue(artifactKey) {
-        this._state.collectedArtifacts[artifactKey].isCollected = true;
-        localStorage.setItem(artifactKey + ' collected', 'true');
-        console.log("Calback for " + artifactKey + "works!")
+    setArtifactCollectedTrue(artifactKeys) { 
+        if (!Array.isArray(artifactKeys) || artifactKeys.length === 0) {
+            console.warn("Artifacts to set true is not an array or is empty:", artifactKeys);
+            return;
+        }
+        // for (var i = 0; i < artifactKeys.length; i++) this._state.collectedArtifacts[artifactKeys[i]].isCollected = true;  
+
+        artifactKeys.forEach(key => {           
+            if (this._state.collectedArtifacts[key]) {                
+                this._state.collectedArtifacts[key].isCollected = true;
+                localStorage.setItem(key + ' artifact collected', 'true');
+            } else {
+                console.warn(`Key ${key} does not exist in collectedArtifacts.`);                
+            }
+        });
     },
 
+    setServiceConditions(conditionsKeys) {
+        if (!Array.isArray(conditionsKeys) || conditionsKeys.length === 0) {
+            console.warn("Conditions to set true is not an array or is empty:", conditionsKeys);
+            return;
+        }
+        
+        conditionsKeys.forEach(key => {  
+                this._state.serviceConditions[key] = true;
+                localStorage.setItem(key + ' condition trigged', 'true');            
+        });
+    },
+
+    // clearKeys() {        
+    //     localStorage.clear();
+    //     const clearStatus = (obj) => {
+    //         if (typeof obj === "object" && obj !== null) {
+    //             if (obj.isAttended !== undefined && obj.isAvailable !== undefined && obj.isCollected !== undefined) {
+    //                 obj.isAttended = false;
+    //                 obj.isAvailable = false;
+    //                 obj.isCollected = false;
+    //             }
+    //             for (const key in obj) {
+    //                 clearStatus(obj[key]);
+    //             }
+    //         }
+    //     };
+    //     clearStatus(this._state.locationsData, this._state.collectedArtifacts);
+    //     window.location.href = "/?rabbit-#" + new Date().getTime() + "-was-just-born!";        
+    // },
+
+           
+    isGameResetting: false,
+      
     clearKeys() {
-        localStorage.clear();
-        // const clearStatus = (obj) => {
-        //     if (typeof obj === "object" && obj !== null) {
-        //         if (obj.isAttended !== undefined && obj.isAvailable !== undefined && obj.isCollected !== undefined) {
-        //             obj.isAttended = false;
-        //             obj.isAvailable = false;
-        //             obj.isCollected = false;
-        //         }
-        //         for (const key in obj) {
-        //             clearStatus(obj[key]);
-        //         }
-        //     }
-        // };
-        // clearStatus(this._state.locationsData, this._state.collectedArtifacts);
-        window.location.href = "/?rabbit-#" + new Date().getTime() + "-was-just-born!";        
+        this.isGameResetting = true; // Флаг, чтобы блокировать эффекты
+        localStorage.clear()
+        //Object.keys(localStorage).forEach(key => localStorage.removeItem(key));      
+        setTimeout(() => {
+            window.location.href = "/?rabbit-#" + new Date().getTime() + "-was-just-born!";
+        }, 0);        
     },
+    clearResetFlag() {
+        this._state.isGameResetting = false;
+    },
+   
 
+    
     dispatch(action) {},
 };
 

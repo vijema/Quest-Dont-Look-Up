@@ -1,7 +1,5 @@
-import { NavLink } from "react-router-dom";
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck";
 import LocationItemDots from "../components/GameMap/LocationItemDots";
-import Bubbles from "../components/Bubbles";
 import Redirect from "../utils/Redirect";
 import Exit from "../components/Exit";
 
@@ -72,12 +70,11 @@ const MajorsHouseNextVisitsComponent = (props) => {
                         coordinates={"!fixed top-[31%] left-[68%]"} 
                         isVisited={props.state.locationsData[props.nextAvailableLocs[1]].isAttended}                               
                 />
-                <Exit link={"/bay-area"} />
+                <Exit link={"/bay-area"} text={"Leave"} />
             </div>
         </main>
     );} else {
         return <Redirect targetUrl={"/bay-area"} />
-
     };
 };
 

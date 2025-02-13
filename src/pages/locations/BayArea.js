@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck";
 import LocationItemDots from "../components/GameMap/LocationItemDots";
 import Bubbles from "../components/Bubbles";
@@ -6,7 +5,7 @@ import Bubbles from "../components/Bubbles";
 const BayArea = (props) => {
     const currentLocation = "BayArea";
     const nextAvailableLocs = ["MajorsHouse"];
-    const artifact = "MajorsHouseKey";
+    const artifacts = ["MajorsHouseKey"];
 
     return (
         <main className="">
@@ -25,15 +24,16 @@ const BayArea = (props) => {
                     locationstoDestroyAtFirstVisitKeys={[]}
                     locationstoDestroyAtNextVisitKeys={[]}
                     setArtifactCollectedTrue={props.setArtifactCollectedTrue}
-                    collectedArtifactKey={artifact}
+                    collectedArtifactKeys={artifacts}
                     render={(isFirstVisit) => isFirstVisit 
                         ? <BayAreaFirstVisitComponent state={props.state} currentLocation={currentLocation} nextAvailableLocs={nextAvailableLocs}/> 
                         : <BayAreaNextVisitsComponent 
                                 state={props.state} 
                                 currentLocation={currentLocation} 
                                 nextAvailableLocs={nextAvailableLocs}
-                                collectedArtifactKey={artifact}
-                                callbackFunk={props.setArtifactCollectedTrue}                                
+                                collectedArtifactKeys={artifacts}
+                                callbackFunk={props.setArtifactCollectedTrue}  
+                                setServiceConditions={props.setServiceConditions}                               
                           /> 
                     }
                 />
@@ -83,47 +83,50 @@ const NextAvailableLocs = (props) => {
     );
 }
 
-const BayAreaNextVisitsComponent = (props) => {    
-
-    if (props.state.collectedArtifacts.MajorsHouseKey.isCollected === false) {
-    return (
-        <main>
-            <img src={props.state.locationsData[props.currentLocation].coverVisited} className="project-details__cover" alt="cover" />
-            <div className="project-details__content w-[460px] h-[85vh] top-[10%] right-[2%]">
-                <div className="title-3">{props.state.locationsData[props.currentLocation].title}</div>
-                <div className="project-details__text">
-                    <p>{textdata.language.agenda}</p>
-                </div>
-                <div className="flex justify-start overflow-hidden overflow-y-auto custom-scrollbar w-[94%]">
-                    <div className="dialog-container">
-                        <Bubbles
-                            state={props.state}
-                            textdata={textdata}
-                            location={props.currentLocation}
-                            title={props.state.locationsData[props.currentLocation].title + " (You are here)"}
-                            coordinates={"!fixed top-[36%] left-[60%]"}
-                            nextAvailableLocs={
-                                <NextAvailableLocs
-                                    state={props.state}
-                                    currentLocation={props.currentLocation}
-                                    nextAvailableLocs={props.nextAvailableLocs}
-                                />
-                            }
-                            flag={["artifact", "dot"]}
-                            collectedArtifactKey={props.collectedArtifactKey}
-                            callbackFunk={props.callbackFunk}
-                        />
-                        <LocationItemDots
-                            title={props.state.locationsData[props.currentLocation].title + " (You are here)"}
-                            upscale={"scale-[400%]"}
-                            coordinates={"!fixed top-[82%] left-[38%]"}
-                            isVisited={"true"}
-                        />
+const BayAreaNextVisitsComponent = (props) => { 
+    if (props.state.serviceConditions.isToldToGardener === false && props.state.locationsData.MajorsHouse.isAttended === false) {
+        return <BayAreaFirstVisitComponent state={props.state} currentLocation={props.currentLocation} nextAvailableLocs={props.nextAvailableLocs} />;
+    } else if (props.state.serviceConditions.isToldToGardener === false && props.state.locationsData.MajorsHouse.isAttended === true) {
+        return (
+            <main>
+                <img src={props.state.locationsData[props.currentLocation].coverVisited} className="project-details__cover" alt="cover" />
+                <div className="project-details__content w-[460px] h-[85vh] top-[10%] right-[2%]">
+                    <div className="title-3">{props.state.locationsData[props.currentLocation].title}</div>
+                    <div className="project-details__text">
+                        <p>{textdata.language.agenda}</p>
+                    </div>
+                    <div className="flex justify-start overflow-hidden overflow-y-auto custom-scrollbar w-[94%]">
+                        <div className="dialog-container">
+                            <Bubbles
+                                state={props.state}
+                                textdata={textdata}
+                                location={props.currentLocation}
+                                title={props.state.locationsData[props.currentLocation].title + " (You are here)"}
+                                coordinates={"!fixed top-[36%] left-[60%]"}
+                                nextAvailableLocs={
+                                    <NextAvailableLocs
+                                        state={props.state}
+                                        currentLocation={props.currentLocation}
+                                        nextAvailableLocs={props.nextAvailableLocs}
+                                    />
+                                }
+                                flag={["artifact", "dot", "condition"]}
+                                collectedArtifactKeys={props.collectedArtifactKeys}
+                                callbackFunk={props.callbackFunk}
+                                setServiceConditions={props.setServiceConditions}
+                                conditions={["isToldToGardener", "isToldToFarmer"]}
+                            />
+                            <LocationItemDots
+                                title={props.state.locationsData[props.currentLocation].title + " (You are here)"}
+                                upscale={"scale-[400%]"}
+                                coordinates={"!fixed top-[82%] left-[38%]"}
+                                isVisited={"true"}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </main>
-    );
+            </main>
+        );
     } else {
         return (
             <div className="project-details-col">
@@ -133,18 +136,17 @@ const BayAreaNextVisitsComponent = (props) => {
                     <div className="project-details__text">
                         <span style={{ color: "aqua" }}>{textdata.language.agendaVisited}</span>
                     </div>
-                    <LocationItemDots  
-                        title={props.state.locationsData[props.currentLocation].title + " (You are here)"}                      
-                        upscale={"scale-[400%]"}  
+                    <LocationItemDots
+                        title={props.state.locationsData[props.currentLocation].title + " (You are here)"}
+                        upscale={"scale-[400%]"}
                         coordinates={"!fixed top-[82%] left-[38%]"}
                         isVisited={"true"}
                     />
 
-                    <NextAvailableLocs state={props.state} currentLocation={props.currentLocation} nextAvailableLocs={props.nextAvailableLocs}/>                 
-
+                    <NextAvailableLocs state={props.state} currentLocation={props.currentLocation} nextAvailableLocs={props.nextAvailableLocs} />
                 </div>
             </div>
-        ); 
+        );
     }
 };
 

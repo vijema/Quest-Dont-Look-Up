@@ -11,12 +11,15 @@ import ChurchYard from "./pages/locations/ChurchYard";
 import Lighthouse from "./pages/locations/Lighthouse";
 import MainNavbar from "./components/MainNavbar/MainNavbar";
 import GameMap from "./pages/components/GameMap/GameMap";
+import { useEffect } from "react";
 
 
 
 
 const App = (props) => {
-
+    useEffect(() => {
+        props.clearResetFlag(); // Убираем флаг сброса
+      }, [props]);
    
     return (
         <Router>
@@ -27,6 +30,7 @@ const App = (props) => {
                 switchLocatonVisibility={props.switchLocatonVisibility}               
                 destroyLocation={props.destroyLocation}
                 setArtifactCollectedTrue={props.setArtifactCollectedTrue}
+                setServiceConditions={props.setServiceConditions}
                 clearKeys={props.clearKeys}
             />
         </Router>
@@ -68,6 +72,7 @@ const MainLayout = (props) => {
                             switchLocatonVisibility={props.switchLocatonVisibility}
                             destroyLocation={props.destroyLocation}
                             setArtifactCollectedTrue={props.setArtifactCollectedTrue}
+                            setServiceConditions={props.setServiceConditions}   
                         />
                     }
                 />            

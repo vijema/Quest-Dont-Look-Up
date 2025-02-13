@@ -53,7 +53,7 @@ const Bubbles = (props) => {
                     Next
                 </button>
             ) : (
-                <AfterDialog 
+                <AfterDialog
                     key={step}
                     state={props.state}
                     nextAvailableLocs={props.nextAvailableLocs}
@@ -63,8 +63,10 @@ const Bubbles = (props) => {
                     //coordinates={props.coordinates}             
                     //isVisited={props.isVisited}
                     flag={props.flag}
-                    collectedArtifactKey={props.collectedArtifactKey}
-                    callbackFunk={props.callbackFunk} 
+                    collectedArtifactKeys={props.collectedArtifactKeys}
+                    callbackFunk={props.callbackFunk}
+                    setServiceConditions={props.setServiceConditions}
+                    conditions={props.conditions}
                     />  
                                   
             )}
@@ -74,7 +76,7 @@ const Bubbles = (props) => {
 }
 
 
-const AfterDialog = (props) => {
+const AfterDialog = (props) => { 
     return (
         <>
             {props.flag.map((f) => {
@@ -96,14 +98,19 @@ const AfterDialog = (props) => {
                             //     isVisited={props.isVisited}                                 
                             // />
                     case "artifact":
-                        return (
-                            <ButtonCallback
-                                key={f}
-                                collectedArtifactKey={props.collectedArtifactKey}
-                                callbackFunk={props.callbackFunk}
-                                btnText={"Take the key"}
-                            />
-                        );    
+                        props.callbackFunk(props.collectedArtifactKeys) 
+                        return <></>
+
+                        // return  <ButtonCallback
+                        //         key={f}
+                        //         collectedArtifactKey={props.collectedArtifactKey}
+                        //         callbackFunk={props.callbackFunk}
+                        //         btnText={"Take the key"}
+                        //         />                           
+                               
+                    
+                    case "condition":
+                        return props.setServiceConditions(props.conditions)
                     
                         default:
                         return null;
@@ -124,7 +131,7 @@ const Button = (props) => {
 
 const ButtonCallback = (props) => {
     return (
-        <div onClick={() => props.callbackFunk(props.collectedArtifactKey)} className="btn-gradient-purpblue ml-2">
+        <div onClick={() => props.callbackFunk(props.collectedArtifactKeys)} className="btn-gradient-purpblue ml-2">
             {props.btnText}
         </div>
     );

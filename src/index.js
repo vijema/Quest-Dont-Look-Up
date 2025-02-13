@@ -12,14 +12,18 @@ root.render(
         setLocationAvailableTrue={store.setLocationAvailableTrue.bind(store)}
         switchLocatonVisibility={store.switchLocatonVisibility.bind(store)}
         destroyLocation={store.destroyLocation.bind(store)}
-        setArtifactCollectedTrue={store.setArtifactCollectedTrue.bind(store)}        
-        clearKeys={store.clearKeys.bind(store)}        
+        setArtifactCollectedTrue={store.setArtifactCollectedTrue.bind(store)}  
+        setServiceConditions={store.setServiceConditions.bind(store)}      
+        clearKeys={store.clearKeys.bind(store)}  
+        clearResetFlag={store.clearResetFlag.bind(store)}
     />
 );
 
+// Local storage purge error caused by PrimaryLocationsVisitCheck component useEffect was allegedly fixet
+// Some callbacks were improved
+// Bay Area locations appearance conditions improved
 
-
-// Internal navigation and conditions were added t the MajorsHouse location
+// Internal navigation and conditions were added to the MajorsHouse location
 // Progress synced with the Local storage and don't erases after the page being reloaded
 
 // Custom big dots for separate locations added

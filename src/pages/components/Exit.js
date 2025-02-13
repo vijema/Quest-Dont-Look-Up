@@ -19,7 +19,7 @@ const Exit = (props) => {
             // style={{ backgroundImage: `url(${BackgroundImage})` }}
             onClick={handleClick}
         ><span className='text-[36px] top-1'>🐇</span>
-        <span className='text-red-600 font-semibold'>Exit</span>
+        <span className='text-sky-400 font-semibold'>{props.text}</span>
         
         </div>
     );
