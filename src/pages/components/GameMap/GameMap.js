@@ -16,7 +16,7 @@ const GameMap = (props) => {
             (state.locationsData[key].isAttended || state.locationsData[key].isAvailable) && !state.locationsData[key].isHidden && !state.locationsData[key].isSubloc
         );
         const elements = attendedLocKeys.map((key) => (
-            <LocationItemDots
+            <LocationItemDots 
                 key={state.locationsData[key].title}
                 title={state.locationsData[key].title}
                 link={state.locationsData[key].link}
@@ -65,7 +65,7 @@ const GameMap = (props) => {
                     <div className="flex flex-col items-center">
                         <div className="img relative">
                             <img src={Map} className={styles.img} alt="map" />
-                            {locElements}
+                           {locElements}
                             <svg onClick={() => setMapOpen(false)} //вернуть функцию закрытия по клику если нужно закрывать модалку только крестиком
                                 className={styles.svg}
                                 fill="none"

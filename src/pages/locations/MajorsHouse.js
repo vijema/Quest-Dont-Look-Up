@@ -1,12 +1,51 @@
+import { Routes, Route } from "react-router-dom";
 import PrimaryLocationsVisitCheck from "../utils/PrimaryLocationsVisitCheck";
 import LocationItemDots from "../components/GameMap/LocationItemDots";
 import Redirect from "../utils/Redirect";
 import Exit from "../components/Exit";
+import Attic from "./MajorsHouse/Attic";
+import Bedroom from "./MajorsHouse/Bedroom";
 
-const MajorsHouse = (props) => { 
+
+const MajorsHouse = (props) => {      
+
+    return  (
+        <Routes>
+          <Route path="living-room" element={<MajorsHouseLivingRoom 
+          state={props.state}
+          setLocationAttendedTrue={props.setLocationAttendedTrue}
+          setLocationAvailableTrue={props.setLocationAvailableTrue}
+          switchLocatonVisibility={props.switchLocatonVisibility}
+          destroyLocation={props.destroyLocation}
+          setArtifactCollectedTrue={props.setArtifactCollectedTrue}
+          setServiceConditions={props.setServiceConditions}  
+          />} />
+          <Route path="attic" element={<Attic 
+          state={props.state}
+          setLocationAttendedTrue={props.setLocationAttendedTrue}
+          setLocationAvailableTrue={props.setLocationAvailableTrue}
+          switchLocatonVisibility={props.switchLocatonVisibility}
+          destroyLocation={props.destroyLocation}
+          setArtifactCollectedTrue={props.setArtifactCollectedTrue}
+          setServiceConditions={props.setServiceConditions}  
+          />} />
+          <Route path="bedroom" element={<Bedroom 
+          state={props.state}
+          setLocationAttendedTrue={props.setLocationAttendedTrue}
+          setLocationAvailableTrue={props.setLocationAvailableTrue}
+          switchLocatonVisibility={props.switchLocatonVisibility}
+          destroyLocation={props.destroyLocation}
+          setArtifactCollectedTrue={props.setArtifactCollectedTrue}
+          setServiceConditions={props.setServiceConditions}  
+          />} />
+        </Routes>
+      );
+}
+
+const MajorsHouseLivingRoom = (props) => { 
     const currentLocation = "MajorsHouse";
     const nextAvailableLocs = ["MajorsHouseBedroom", "MajorsHouseAttic"];  
-    const artifact = "MajorsLetter";
+    
 
     return (
         <main className="">
@@ -24,8 +63,7 @@ const MajorsHouse = (props) => {
                     destroyLocation={props.destroyLocation}
                     locationstoDestroyAtFirstVisitKeys={[]}
                     locationstoDestroyAtNextVisitKeys={[]}
-                    setArtifactCollectedTrue={props.setArtifactCollectedTrue}
-                    collectedArtifactKey={artifact}
+                    setArtifactCollectedTrue={props.setArtifactCollectedTrue}                    
                     render={(isFirstVisit) => isFirstVisit 
                         ? <Redirect targetUrl={"/bay-area"} />
                         : <MajorsHouseNextVisitsComponent state={props.state} currentLocation={currentLocation} nextAvailableLocs={nextAvailableLocs}/> 
@@ -54,9 +92,10 @@ const MajorsHouseNextVisitsComponent = (props) => {
                 <div className="project-details__text">
                     <p>{textdata.language.agenda}</p>
                     {/* <span style={{ color: "aqua" }}>{textdata.language.agenda}</span> */}
-                </div>
-                               
-                <LocationItemDots                        
+                </div> 
+            </div>
+
+            <LocationItemDots                        
                         title={props.state.locationsData[props.nextAvailableLocs[0]].title}
                         link={props.state.locationsData[props.nextAvailableLocs[0]].link}
                         upscale={"scale-[400%]"} 
@@ -70,8 +109,8 @@ const MajorsHouseNextVisitsComponent = (props) => {
                         coordinates={"!fixed top-[31%] left-[68%]"} 
                         isVisited={props.state.locationsData[props.nextAvailableLocs[1]].isAttended}                               
                 />
+               
                 <Exit link={"/bay-area"} text={"Leave"} />
-            </div>
         </main>
     );} else {
         return <Redirect targetUrl={"/bay-area"} />

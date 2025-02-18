@@ -19,6 +19,10 @@ root.render(
     />
 );
 
+
+
+// Stork animation and sublocs added, flyaway effect needed
+
 // Local storage purge error caused by PrimaryLocationsVisitCheck component useEffect was allegedly fixet
 // Some callbacks were improved
 // Bay Area locations appearance conditions improved

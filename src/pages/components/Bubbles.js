@@ -89,14 +89,16 @@ const AfterDialog = (props) => {
                     case "dot":
                         return props.nextAvailableLocs
 
-                            // <LocationItemDots 
-                            //     key={f}
-                            //     title={props.title} 
-                            //     link={props.link} 
-                            //     coordinates={props.coordinates}  
-                            //     upscale={"scale-[400%]"}           
-                            //     isVisited={props.isVisited}                                 
-                            // />
+                    case "dotarray":
+                        return  <LocationItemDots 
+                                    key={f}
+                                    title={props.title} 
+                                    link={props.link} 
+                                    coordinates={props.coordinates}  
+                                    upscale={"scale-[400%]"}           
+                                    isVisited={props.isVisited}                                 
+                                />
+
                     case "artifact":
                         props.callbackFunk(props.collectedArtifactKeys) 
                         return <></>

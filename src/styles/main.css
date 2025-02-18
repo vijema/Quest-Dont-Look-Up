@@ -59,7 +59,7 @@ body {
 	letter-spacing: -0.5px;
 
 	/* Light mode */
-	background-color: var(--page-bg);
+	/* background-color: var(--page-bg); */
 	color: var(--text-color);
 	
 	scrollbar-width: none;
@@ -274,6 +274,7 @@ body {
     height: 100vh; /* Высота 100% от высоты окна */
     object-fit: cover; /* Сохраняет пропорции изображения и заполняет контейнер */
     z-index: 0;		
+	background-color: transparent;	
 }
 
 .dialog-container {
@@ -568,7 +569,7 @@ body {
 }
   
 .first-appearance-bounce {
-	animation: custom-bounce 1s ease-in-out 3 forwards;
+	animation: first-appearance-bounce 1s ease-in-out 3 forwards;
 }  
 
   

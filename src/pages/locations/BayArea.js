@@ -4,7 +4,7 @@ import Bubbles from "../components/Bubbles";
 
 const BayArea = (props) => {
     const currentLocation = "BayArea";
-    const nextAvailableLocs = ["MajorsHouse"];
+    const nextAvailableLocs = ["MajorsHouse", "TheCity", "MorpheusKiosk"];
     const artifacts = ["MajorsHouseKey"];
 
     return (
@@ -43,7 +43,7 @@ const BayArea = (props) => {
 };
 
 
-const BayAreaFirstVisitComponent = (props) => {
+const BayAreaFirstVisitComponent = (props) => { //Arrival to Bay Area
     return (
             <div className="project-details-col">
                 <img src={props.state.locationsData[props.currentLocation].cover} className="project-details__cover" alt="cover" />
@@ -51,8 +51,7 @@ const BayAreaFirstVisitComponent = (props) => {
                     <div className="title-3">{props.state.locationsData[props.currentLocation].title}</div>
                     <div className="project-details__text">
                         <span style={{ color: "aqua" }}>{textdata.language.agendaFirst}</span>
-                    </div>
-                    
+                    </div>                    
 
                     <LocationItemDots  
                         title={props.state.locationsData[props.currentLocation].title + " (You are here)"}                      
@@ -83,7 +82,7 @@ const NextAvailableLocs = (props) => {
     );
 }
 
-const BayAreaNextVisitsComponent = (props) => { 
+const BayAreaNextVisitsComponent = (props) => { // Talk to Gardener
     if (props.state.serviceConditions.isToldToGardener === false && props.state.locationsData.MajorsHouse.isAttended === false) {
         return <BayAreaFirstVisitComponent state={props.state} currentLocation={props.currentLocation} nextAvailableLocs={props.nextAvailableLocs} />;
     } else if (props.state.serviceConditions.isToldToGardener === false && props.state.locationsData.MajorsHouse.isAttended === true) {
@@ -127,7 +126,7 @@ const BayAreaNextVisitsComponent = (props) => {
                 </div>
             </main>
         );
-    } else {
+    } else { // Other visits with no Gardener
         return (
             <div className="project-details-col">
                 <img src={props.state.locationsData[props.currentLocation].coverReVisited} className="project-details__cover" alt="cover" />
@@ -151,14 +150,12 @@ const BayAreaNextVisitsComponent = (props) => {
 };
 
 
-
-
 const textdata = {
     language: 
               {
               agenda: "The Mayor's house is located right on the coast. As expected, no one answers when you knock. Suddenly you are noticed by the Mayor's neighbor - a local gardener.",
-              agendaFirst: "Ваш первый визит в Bay- Area",
-              agendaVisited: "Вы снова на берегу",
+              agendaFirst: "This is your first visit of the Bay Area",
+              agendaVisited: "You are on a coast again",
               dialogs: [
                       {   char: "Gardener",
                           colo: "text-blue-700",

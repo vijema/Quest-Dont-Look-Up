@@ -36,7 +36,7 @@ let store = {
                 isHidden: false,
                 coordinates: "top-[79%] left-[83%]",
                 cover: images.locationCovers.MajorsHouse,
-                link: "/majors-house",                
+                link: "/majors-house/living-room",                
             },
             MajorsHouseAttic: {
                 title: "Attic",
@@ -44,8 +44,10 @@ let store = {
                 isAttended: localStorage.getItem("MajorsHouseAttic has visited") === "true" ? true : false,
                 isHidden: false,
                 //coordinates: "top-[79%] left-[83%]",
-                cover: images.locationCovers.MajorsHouse,
-                link: "/majors-house-attic",
+                cover: images.locationCovers.MajorsHouseAttic1,
+                coverVisited: images.locationCovers.MajorsHouseAttic2,
+                coverReVisited: images.locationCovers.MajorsHouseAttic,
+                link: "/majors-house/attic",
                 isSubloc: true
             },
             MajorsHouseBedroom: {
@@ -54,8 +56,8 @@ let store = {
                 isAttended: localStorage.getItem("MajorsHouseAttic has visited") === "true" ? true : false,
                 isHidden: false,
                 //coordinates: "top-[79%] left-[83%]",
-                cover: images.locationCovers.MajorsHouse,
-                link: "/majors-house-bedroom",
+                cover: images.locationCovers.MajorsHouseBedroom,
+                link: "/majors-house/bedroom",
                 isSubloc: true
             },
 
@@ -67,25 +69,59 @@ let store = {
                 coordinates: "top-[91%] left-[61.36%]",
                 link: "/lighthouse",
                 cover: images.locationCovers.Lighthouse,
-
-                
-
-                LighthouseMainDoor: {
-                    title: "Lighthouse Main Door",
-                    link: "/",
-                    isAvailable: false,
-                    isAttended: true,
-                    isHidden: false,
-                },
-
-                LighthouseBackDoor: {
-                    title: "Lighthouse Back Door",
-                    link: "/",
-                    isAvailable: false,
-                    isAttended: false,
-                    isHidden: false,
-                },
             },
+            LighthouseMainDoor: {
+                title: "Lighthouse Main Door",
+                link: "/",
+                isAvailable: false,
+                isAttended: true,
+                isHidden: false,
+            },
+            LighthouseBackDoor: {
+                title: "Lighthouse Back Door",
+                link: "/",
+                isAvailable: false,
+                isAttended: false,
+                isHidden: false,
+            },
+
+            // The City
+            TheCity: {
+                title: "The City",                
+                isAvailable: localStorage.getItem("TheCity is now available") === "true" ? true : false,
+                isAttended: localStorage.getItem("TheCity has visited") === "true" ? true : false,
+                isHidden: localStorage.getItem("TheCity visibility changed") === "true" ? true : false,
+                coordinates: "top-[68%] left-[78.4%]",
+                coordinatesLocal: "!fixed top-[62%] left-[72%]",
+                cover: images.locationCovers.City,
+                coverVisited: images.locationCovers.City,
+                coverReVisited: images.locationCovers.City,
+                link: "/the-city/main-spot",
+                isCitySubloc: true
+            },
+            MorpheusKiosk: {
+                title: "Morpheus Kiock",
+                isAvailable: false,
+                isAttended: localStorage.getItem("MorpheusKiosk has visited") === "true" ? true : false,
+                isHidden: false,                
+                cover: images.locationCovers.City,
+                coordinatesLocal: "!fixed top-[44%] left-[30%]",
+                link: "/the-city/morpheus-kiosk",
+                isSubloc: true,
+                isCitySubloc: true
+            },
+            ThornyField: {
+                title: "Thorny Field",
+                isAvailable: false,
+                isAttended: localStorage.getItem("ThornyField has visited") === "true" ? true : false,
+                isHidden: false, //localStorage.getItem("ThornyField visibility changed") === "false" ? false : true,  //Hidden at start               
+                cover: images.locationCovers.City,
+                coordinatesLocal: "!fixed top-[73%] left-[18.5%]",
+                link: "/the-city/thorny-field",
+                isSubloc: true,
+                isCitySubloc: true
+            },
+           
 
             FarmersHouse: {
                 title: "Farmer's House",                
@@ -186,6 +222,8 @@ let store = {
         serviceConditions: {
             isToldToGardener: localStorage.getItem("isToldToGardener condition trigged") === "true" ? true : false,
             isToldToFarmer: localStorage.getItem("isToldToFarmer condition trigged") === "true" ? true : false,
+            isStorkBeenInside: localStorage.getItem("isStorkBeenInside condition trigged") === "true" ? true : false,
+            
         }
     },   
    

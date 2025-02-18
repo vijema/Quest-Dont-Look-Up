@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useEffect } from "react";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import "./styles/main.css";
 import { scrollbar } from "./styles/scrollbar.css";
+
 import Welcome from "./pages/Welcome";
 import Start from "./pages/locations/Start";
 import BayArea from "./pages/locations/BayArea";
@@ -11,7 +13,8 @@ import ChurchYard from "./pages/locations/ChurchYard";
 import Lighthouse from "./pages/locations/Lighthouse";
 import MainNavbar from "./components/MainNavbar/MainNavbar";
 import GameMap from "./pages/components/GameMap/GameMap";
-import { useEffect } from "react";
+
+import TheCity from "./pages/locations/City/City";
 
 
 
@@ -50,7 +53,7 @@ const MainLayout = (props) => {
                 <Route exact path="/" element={<Welcome clearKeys={props.clearKeys} />} />                  
 
                 <Route
-                    path="/start"
+                    path="/start"                   
                     element={
                         <Start
                             state={props.state}
@@ -75,9 +78,23 @@ const MainLayout = (props) => {
                             setServiceConditions={props.setServiceConditions}   
                         />
                     }
-                />            
+                />     
                 <Route
-                    path="/majors-house"
+                    path="/the-city/*"             
+                    element={
+                        <TheCity
+                            state={props.state}
+                            setLocationAttendedTrue={props.setLocationAttendedTrue}
+                            setLocationAvailableTrue={props.setLocationAvailableTrue}
+                            switchLocatonVisibility={props.switchLocatonVisibility}
+                            destroyLocation={props.destroyLocation}
+                            setArtifactCollectedTrue={props.setArtifactCollectedTrue}
+                            setServiceConditions={props.setServiceConditions}   
+                        />
+                    }
+                />        
+                <Route
+                    path="/majors-house/*"
                     element={
                         <MajorsHouse
                             state={props.state}
@@ -134,7 +151,9 @@ const MainLayout = (props) => {
        
             {location.pathname !== "/" && 
              location.pathname !== "/start" && 
-             location.pathname !== "/majors-house" && 
+             location.pathname !== "/majors-house/living-room" &&
+             location.pathname !== "/majors-house/attic" && 
+             location.pathname !== "/majors-house/bedroom" &&  
              <GameMap state={props.state}/>}
         </div>
     );

@@ -1,0 +1,52 @@
+@keyframes storkBounce {
+	0%, 100% {
+       @apply origin-bottom rotate-0
+	}
+	50% {
+        @apply origin-bottom -rotate-12
+	}
+}
+  
+.storkBounce {    
+	animation: storkBounce 0.3s linear 3 forwards;
+}  
+
+
+@keyframes storkFlightOutside {
+	0% {
+        transform: translateX(0px) translateY(0px); 
+	}
+	100% {
+        transform: translateX(-370px) translateY(45%)
+	}
+}
+
+/* Начальное состояние блока */
+.storkFlightOutside {
+    animation: storkFlightOutside 0.5s ease-in-out forwards;
+  }
+
+.finalPositionOutside {
+  right: 120px;
+  bottom: 34%  
+}
+
+
+@keyframes storkFlightInside {
+    0% {
+        transform: translateX(0px) translateY(0px); 
+	}
+	100% {
+        transform: translateX(-730px) translateY(75%)
+	}
+}
+.storkFlightInside {
+    animation: storkFlightInside 1s ease-in-out forwards;
+  }
+
+.storkFinalPositionInside {
+    right: 850px;
+    bottom: 15%  
+  }
+  
+

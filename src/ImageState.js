@@ -4,7 +4,10 @@ import BayArea from './images/MainLocations/BayArea.jpg';
 import BayArea2 from './images/MainLocations/BayArea2.jpg';
 import BayArea3 from './images/MainLocations/BayArea3.jpg';
 import MajorsHouse from './images/MajorsHouse/MajorsHouse.jpg';
-import MajorsHouseAttic from './images/MajorsHouse/MajorsHouseAttic2.jpg';
+import MajorsHouseAttic from './images/MajorsHouse/MajorsHouseAttic.jpg';
+import MajorsHouseAttic1 from './images/MajorsHouse/MajorsHouseAttic1.png';
+import MajorsHouseAttic2 from './images/MajorsHouse/MajorsHouseAttic2.png';
+import MajorsHouseBedroom from './images/MajorsHouse/MajorsHouseBedroom.jpg';
 import MajorStatue from './images/MainLocations/MajorStatue.jpg';
 import FarmersHouse from './images/MainLocations/FarmersHouse.jpg';
 import Beacon from './images/MainLocations/Beacon.jpg';
@@ -45,18 +48,21 @@ import ChurchKey from './images/artifacts/KeyChurch.jpg'
 
 const images = {
     locationCovers: {
-        Start: Start,
-        Start2: Start2,
-        BayArea: BayArea,
-        BayArea2: BayArea2,
-        BayArea3: BayArea3,
-        MajorStatue: MajorStatue,
-        MajorsHouse: MajorsHouse,
-        MajorsHouseAttic: MajorsHouseAttic,
-        FarmersHouse: FarmersHouse,
-        Beacon: Beacon,
-        Church: Church,
-        City: City,
+        Start,
+        Start2,
+        BayArea,
+        BayArea2,
+        BayArea3,
+        MajorStatue,
+        MajorsHouse,
+        MajorsHouseAttic,
+        MajorsHouseAttic1,
+        MajorsHouseAttic2,
+        MajorsHouseBedroom,
+        FarmersHouse,
+        Beacon,
+        Church,
+        City,
         SurfresBase: SurfresBase,        
         VikingBoat: VikingBoat,
         Whale: Whale,
